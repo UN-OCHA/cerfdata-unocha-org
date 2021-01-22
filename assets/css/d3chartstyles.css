@@ -1,0 +1,948 @@
+/******************/
+/*GENERAL STYLES:
+These styles apply to all D3 charts*/
+
+/*styles for 'fill'*/
+
+.contributionColorFill {
+	fill: #418fde;
+}
+
+.allocationColorFill {
+	fill: #eca154;
+}
+
+.contributionColorDarkerFill {
+	fill: #2e649b;
+}
+
+.allocationColorDarkerFill {
+	fill: #a5713b;
+}
+
+.contributionColorBrighterFill {
+	fill: #5dccff;
+}
+
+.allocationColorBrighterFill {
+	fill: #ffe678;
+}
+
+/*styles for 'stroke'*/
+
+.contributionColorStroke {
+	stroke: #418fde;
+}
+
+.allocationColorStroke {
+	stroke: #eca154;
+}
+
+.contributionColorDarkerStroke {
+	stroke: #2e649b;
+}
+
+.allocationColorDarkerStroke {
+	stroke: #a5713b;
+}
+
+.contributionColorBrighterStroke {
+	stroke: #5dccff;
+}
+
+.allocationColorBrighterStroke {
+	stroke: #ffe678;
+}
+
+/*styles for 'HTML color'*/
+
+.contributionColorHTMLcolor {
+	color: #418fde;
+}
+
+.allocationColorHTMLcolor {
+	color: #eca154;
+}
+
+.contributionColorDarkerHTMLcolor {
+	color: #2e649b;
+}
+
+.allocationColorDarkerHTMLcolor {
+	color: #a5713b;
+}
+
+.contributionColorBrighterHTMLcolor {
+	color: #5dccff;
+}
+
+.allocationColorBrighterHTMLcolor {
+	color: #ffe678;
+}
+
+/*styles for 'HTML background-color'*/
+
+.contributionColorHTMLbc {
+	background-color: #418fde;
+}
+
+.allocationColorHTMLbc {
+	background-color: #eca154;
+}
+
+.contributionColorDarkerHTMLbc {
+	background-color: #2e649b;
+}
+
+.allocationColorDarkerHTMLbc {
+	background-color: #a5713b;
+}
+
+.contributionColorBrighterHTMLbc {
+	background-color: #5dccff;
+}
+
+.allocationColorBrighterHTMLbc {
+	background-color: #ffe678;
+}
+
+/*styles for UN partners colors - fill*/
+
+.NationalNGOPartnerColor {
+	fill: #75c0de;
+}
+
+.UNAgencyPartnerColor {
+	fill: #b5dffd;
+}
+
+.OthersPartnerColor {
+	fill: #f02720;
+}
+
+.InternationalNGOPartnerColor {
+	fill: #e9c39b;
+}
+
+/*styles for the chart title, footer and help/csv/image/share buttons*/
+
+.d3chartIconsDiv {
+	line-height: normal !important;
+}
+
+.d3chartIconsDiv button {
+	white-space: pre;
+	font-size: 12px;
+	font-weight: 700;
+	color: white;
+	background-color: #418fde;
+	padding: 3px 8px 3px 8px;
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border: 1px solid rgba(0,0,0,0.3);
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
+	margin-right: 6px;
+	line-height: normal !important;
+  }
+
+.d3chartIconsDiv button:hover {
+	background-color: #2e649b;
+	border-color: rgba(0,0,0,0.6);
+	cursor: pointer;
+}
+
+.d3chartIconsDiv button:active {
+	background-color: #bbb;
+	border-color: rgba(0,0,0,1);
+}
+
+.d3chartIconsDiv button:focus {
+	outline: none;
+}
+
+.d3chartFooterText {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	color: #888;
+	text-align: right;
+	width: 98%;
+}
+
+.d3chartShareDiv {
+	position: absolute;
+	background-color: #f9f9f9;
+	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.25);
+	pointer-events: none;
+	border-radius: 4px;
+	font-size: 14px;
+	padding: 5px 10px 5px 10px;
+	margin: 0px;
+	color: #222;
+	font-family: "Arial", sans-serif;
+	z-index: 2100;
+	border: 1px solid lightgray;
+}
+
+.d3chartShareDiv:after {
+	content: "";
+	height: 0;
+	position: absolute;
+	width: 0;
+	top: 7px;
+	right: -12px;
+	border: 6px solid transparent;
+	border-left-color: #f9f9f9;
+}
+
+.d3chartShareDiv:before {
+	content: "";
+	height: 0;
+	position: absolute;
+	width: 0;
+	top: 6px;
+	right: -15px;
+	border: 7px solid transparent;
+	border-left-color: lightgray;
+}
+
+/*Allocations Overview (code: allocover)*/
+
+#d3chartcontainerallocover {
+	position: relative;
+}
+
+#allocoverDownloadingDiv {
+	position: absolute;
+	padding: 8px;
+	background: #fcfcfc; 
+	border: 1px solid #222; 
+	border-radius: 8px;
+	pointer-events: none;
+	cursor: none;
+	width: 200px;
+	height: 100px;
+	z-index: 1500;
+}
+
+#allocovertooltipdiv, #allocovertooltipdivBar {    
+	position: absolute;
+	text-align: left;
+	color: #333;
+	font-family: 'Roboto', sans-serif;
+	white-space: normal;	
+	line-height: 120%;
+	font-size: 14px;
+	padding: 8px;
+	background: #f8f8f8; 
+	border: 1px solid #418fde; 
+	border-radius: 4px;
+	pointer-events: none;
+	cursor: none;
+	z-index: 1500;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+#allocovertooltipdiv > div:nth-child(1) > div:nth-child(1n+1) {
+	color: #888;
+}
+
+#allocovertooltipdiv > div:nth-child(1) > div:nth-child(2n+2) {
+	color: #333;
+	font-weight: 600;
+}
+
+#allocoverinnerTooltipDiv > div:nth-child(1){
+	padding: 6px 8px;
+    background-color: #418fde;
+    color: #fff;
+	margin-left: -8px;
+	margin-right: -8px;
+	margin-top: -8px;
+}
+
+#allocoverinnerTooltipDiv > div:nth-child(1) strong{
+	font-size: 15px !important;
+	color:#fff !important;
+}
+
+#allocoverinnerTooltipDiv > div:nth-child(2) > div:nth-child(1){
+	color:#888;
+	font-weight: normal;
+}
+
+#allocoverinnerTooltipDiv > div:nth-child(2) > div:nth-child(2){	
+	font-size: 16px;
+    font-weight: 600;
+}
+
+#allocoverinnerTooltipDiv > div:nth-child(3){	
+	color: #418fde !important;
+}
+
+#allocovertooltipdivBar #allocoverinnerTooltipDiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) {
+	color: #333;
+    font-weight: 600;
+}
+
+#allocovertooltipdivBar #allocoverinnerTooltipDiv > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) {
+	color: #888;
+    font-weight: normal;
+	font-size: 14px;
+}
+
+#allocovertooltipdivBar #allocoverinnerTooltipDiv > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) {
+	color: #333;
+    font-weight: 600;
+	font-size: 14px;
+}
+
+#allocovertooltipdivBar #allocoverinnerTooltipDiv > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) {
+	color: #888;
+    font-weight: normal;
+}
+
+#allocovertooltipdivBar #allocoverinnerTooltipDiv > div:nth-child(2) > div:nth-child(3) > div:nth-child(2) {
+	color: #333;
+    font-weight: 600;
+}
+
+.allocoverTopDiv {
+	display: flex;
+	width: 100%;
+	margin-bottom: 4px;
+}
+
+.allocoverTitleDiv {
+	display: flex;
+	flex:0 50%;
+	margin-left: 8px;
+}
+
+.allocoverIconsDiv {
+	display: flex;
+	flex:0 50%;
+	flex-direction: row-reverse;
+	align-items: center;
+	margin-right: 16px;
+}
+
+.allocoverFooterDiv {
+	width: 100%;
+	margin-top: 8px;
+}
+
+.allocoverYearsDescriptionDiv {
+	margin-left: 22px;
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	color: #888;
+	width: 98%;
+}
+
+.allocoverOverDivHelp {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255,255,255,0.5);
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+
+p#allocoverd3chartTitle {
+	font-size: 26px;
+	font-family: "Arial", sans-serif;
+	margin: 0px;
+	color: #418fde;
+}
+
+.allocoverbuttonsText, .allocoverbuttonsCbpfText, .allocoverbuttonsCerfText {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	pointer-events: none;
+}
+
+.allocovercbpfTitle, .allocovercerfTitle {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	font-weight: 700;
+	fill: #666;
+	pointer-events: none;
+}
+
+.allocoverleftArrowText, .allocoverrightArrowText {
+	font-family: "Arial", sans-serif;
+	font-size: 20px;
+	pointer-events: none;
+}
+
+.allocoverlegendTitle {
+	font-family: "Roboto", sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	fill: #888;
+}
+
+.allocovertopPanelMainValue, .allocovertopPanelCountriesValue, .allocovertopPanelRegionalsValue {
+	font-family: "Arial", sans-serif;
+	font-size: 48px;
+	dominant-baseline: central;
+}
+
+.allocovertopPanelRapidResponseValue, .allocovertopPanelUnderfundedValue {
+	font-family: "Arial", sans-serif;
+	font-size: 18px;
+	dominant-baseline: central;
+}
+
+.allocovertopPanelRapidResponseText, .allocovertopPanelUnderfundedText {
+	font-family: "Arial", sans-serif;
+	font-size: 14px;
+	dominant-baseline: central;
+	fill: #888;
+}
+
+.allocovertopPanelMainText, .allocovertopPanelSubText, .allocovertopPanelCountriesText, .allocovertopPanelRegionalsText {
+	font-family: "Arial", sans-serif;
+	font-size: 18px;
+	fill: #888;
+}
+
+.allocovertopPanelCountriesText, .allocovertopPanelRegionalsText {
+	dominant-baseline: central;
+}
+
+.allocoverxAxisGroupColumnBySector path, .allocoveryAxisGroupColumnBySector path {
+	stroke: none;
+}
+
+.allocoverxAxisGroupColumnBySector text {
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  fill: #888;
+  pointer-events: none;
+}
+
+.allocoveryAxisGroupColumnBySector text {
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  fill: #888;
+  pointer-events: none;
+  letter-spacing: -0.25px;
+}
+
+.allocoverlabelsColumnBySector {
+  font-family: "Roboto", sans-serif;
+  font-size: 9px;
+  fill: #333;
+  letter-spacing: -0.25px;
+  pointer-events: none;
+  dominant-baseline: central;
+}
+
+.allocoveryAxisGroupColumnBySector line {
+stroke: darkslategray;
+}
+
+.allocoverxAxisGroupColumnBySector line {
+  stroke: #ddd;
+  stroke-dasharray: 2, 2;
+}
+
+.allocoverlegendCirclesText {
+	font-family: "Arial", sans-serif;
+	font-size: 9px;
+	fill: darkslategray;	
+}
+
+.allocoverLegendColorTexts {
+	font-family: "Arial", sans-serif;
+	font-size: 10px;
+	fill: darkslategray;	
+	dominant-baseline: hanging;
+}
+
+.allocoverCerfText, .allocovercountryNames {
+	text-anchor: middle;
+	dominant-baseline: central;
+	font-family: "Arial", sans-serif;
+	font-size: 10px;
+	fill: darkslategray;
+	pointer-events: none;	
+}
+
+.allocovershowNamesText {
+	font-family: "Arial", sans-serif;
+	font-size: 10px;
+	fill: darkslategray;
+}
+
+.allocovergroupName {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	pointer-events: none;
+	fill: darkslategray;
+	paint-order: stroke;
+    stroke: white;
+    stroke-width: 2px;
+}
+
+.allocoverzoomPath {
+	fill: white;
+}
+
+.allocoverzoomPath:hover {
+	fill: #f4f4f4;
+}
+
+.allocoverzoomText {
+	font-family: "Arial", sans-serif;
+	font-size: 20px;
+	fill: #222;
+	pointer-events: none;	
+}
+
+.allocoverTooltipSvgYAxisGroup path, .allocoverTooltipSvgXAxisGroup path {
+	stroke: none;
+}
+
+.allocoverTooltipSvgYAxisGroup text {
+	font-family: "Arial";
+	font-size: 11px;
+	fill: #444;
+}
+
+.allocoverTooltipSvgXAxisGroup text {
+	font-family: "Roboto", sans-serif;
+	font-size: 9px;
+	fill: #aaa;
+	pointer-events: none;
+}
+
+.allocoverTooltipSvgXAxisGroup line {
+	stroke: #ddd;
+	stroke-dasharray: 2, 2;
+}
+
+.allocovercbpfLabel {
+	font-family: "Roboto", sans-serif;
+	font-size: 10px;
+	fill: #666;
+	pointer-events: none;
+}
+
+.allocoverAnnotationMainText {
+	font-family: "Arial", sans-serif;
+	font-size: 26px;
+	font-weight: 700;
+	pointer-events: none;
+}
+
+.allocoverAnnotationText {
+	font-family: "Arial", sans-serif;
+	font-size: 15px;
+	fill: #222;
+	pointer-events: none;
+}
+
+#allocoverSnapshotTooltip {
+	z-index: 1600;
+}
+
+.allocoverSnapshotContent {
+	position: absolute;
+	min-width: 100px;
+	display: none;
+	background-color: #f9f9f9;
+	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.25);
+	cursor: pointer;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.allocoverSnapshotContent #allocoverSnapshotPdfText, .allocoverSnapshotContent #allocoverSnapshotPngText, .allocoverSnapshotContent #allocoverSnapshotTooltipPdfText, .allocoverSnapshotContent #allocoverSnapshotTooltipPngText {
+	font-size: 14px;
+	padding: 10px;
+	margin: 0px;
+	color: #222;
+	font-family: "Arial", sans-serif;
+}
+
+.allocoverSnapshotContent #allocoverBestVisualizedText, .allocoverSnapshotContent #allocoverTooltipBestVisualizedText {
+	font-size: 11px;
+	padding: 10px;
+	margin: 0px;
+	color: #222;
+	font-family: "Arial", sans-serif;
+	border-top: 1px solid lightgray;
+	width: 202px;
+}
+
+.allocoverSnapshotContent #allocoverSnapshotPdfText:hover, .allocoverSnapshotContent #allocoverSnapshotPngText:hover, .allocoverSnapshotContent #allocoverSnapshotTooltipPdfText:hover, .allocoverSnapshotContent #allocoverSnapshotTooltipPngText:hover {
+	background-color: #1F69B3;
+	color: white;
+}
+
+.allocoverstackedBarchartDiv {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.allocoverstackedBarchartDivTitle {
+	width: 100%;
+	font-family: "Roboto", sans-serif;
+	font-size: 18px;
+	color: #222;
+	font-weight: 300;
+	margin-top: 8px;
+	margin-bottom: 4px;
+	margin-left: 10px;
+}
+
+.allocoverstackedBarchartContainerDiv {
+	width: 100%;
+	position: relative;
+}
+
+.allocoverxAxisBarGroup text {
+	font-size: 10px;
+	fill: #888;
+	letter-spacing: -0.025em;
+	font-family: "Roboto", sans-serif;
+}
+
+.allocoverxAxisBarGroup path {
+	stroke: none;
+}
+
+.allocoverunderfundedLabel, .allocoverrapidResponseLabel {
+	font-family: "Roboto", sans-serif;
+	font-size: 12px;
+	text-anchor: middle;
+	font-weight: 400;
+}
+
+.allocoverlegendGroup {
+	font-family: "Roboto", sans-serif;
+	font-size: 12px;
+	fill: #444;
+	dominant-baseline: central;
+}
+
+/*Contributions Overview (code: contribover)*/
+
+#d3chartcontainercontribover {
+	position: relative;
+}
+
+#contriboverDownloadingDiv {
+	position: absolute;
+	padding: 8px;
+	background: #fcfcfc; 
+	border: 1px solid #222; 
+	border-radius: 8px;
+	pointer-events: none;
+	cursor: none;
+	width: 200px;
+	height: 100px;
+	z-index: 1500;
+}
+
+#contribovertooltipdiv {    
+	position: absolute;
+	text-align: left;
+	color: darkslategray;
+	font-family: "Roboto", sans-serif;
+	white-space: normal;
+	padding: 8px;
+	line-height: 120%;
+	font-size: 14px;
+	background: #f8f8f8; 
+	border: 1px solid #428fdf; 
+	border-radius: 4px;
+	pointer-events: none;
+	cursor: none;
+	max-width: 300px;
+	z-index: 1500;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+#contribovertooltipdiv br{
+	display:none;
+}
+
+#contribovertooltipdiv > div:nth-child(3){
+	color:#418fde;	
+}
+
+#contribovertooltipdiv > div:nth-child(1){
+	color: #888;
+    font-weight: normal;
+}
+
+.contribovertooltipTitle{
+	padding: 6px 8px;
+    background-color: #418fde;
+    color: #fff !important;
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-top: -8px;
+}
+
+.contribovertooltipRow{
+	color: #888;
+    font-weight: normal;
+}
+
+.contribovertooltipRow .contributionColorHTMLcolor{
+	color: #333;
+    font-weight: 600;
+}
+
+#contribovertooltipdiv > div:nth-child(1) > div:nth-child(2) > span.contributionColorHTMLcolor{
+	color: #333 !important;
+    font-weight: 600 !important;
+}
+#contribovertooltipdiv > div:nth-child(1) > div:nth-child(4) > span.contributionColorHTMLcolor{
+	color: #333 !important;
+    font-weight: 600 !important;
+}
+#contribovertooltipdiv > div:nth-child(1) > div:nth-child(6) > span.contributionColorHTMLcolor{
+	color: #333 !important;
+    font-weight: 600 !important;
+}
+
+.contriboverTopDiv {
+	display: flex;
+	width: 100%;
+	margin-bottom: 4px;
+}
+
+.contriboverTitleDiv {
+	display: flex;
+	flex:0 50%;
+	margin-left: 16px;
+}
+
+.contriboverIconsDiv {
+	display: flex;
+	flex:0 50%;
+	flex-direction: row-reverse;
+	align-items: center;
+	margin-right: 16px;
+}
+
+.contriboverFooterDiv {
+	width: 100%;
+	margin-top: 8px;
+}
+
+.contriboverYearsDescriptionDiv {
+	margin-left: 12px;
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	color: #888;
+	width: 98%;
+	text-align: left;
+}
+
+.contriboverSelectionDescriptionDiv {
+	margin-left: 13px;
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	color: #888;
+	width: 98%;
+}
+
+.contriboverOverDivHelp {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255,255,255,0.5);
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+
+p#contriboverd3chartTitle {
+	font-size: 26px;
+	font-family: "Arial", sans-serif;
+	margin: 0px;
+	color: #418fde;
+}
+
+.contribovertopPanelMainValue, .contribovertopPanelDonorsNumber, .contribovertopPanelCbpfsNumber, .contribovertopPanelAllTimeValue {
+	font-family: "Arial", sans-serif;
+	font-size: 48px;
+}
+
+.contribovertopPanelMainText, .contribovertopPanelSubText, .contribovertopPanelAllTimeText, .contribovertopPanelAllTimeSubText {
+	font-family: "Arial", sans-serif;
+	font-size: 18px;
+	fill: #888;
+}
+
+.contribovertopPanelDonorsText, .contribovertopPanelCbpfsText {
+	font-family: "Arial", sans-serif;
+	font-size: 22px;
+	fill: #888;
+}
+
+.contribovertopPanelDonorsTextSubText, .contribovertopPanelCbpfsTextSubText {
+	font-family: "Arial", sans-serif;
+	font-size: 14px;
+	fill: #888;
+}
+
+.contriboverbuttonsText, .contriboverbuttonsContributionsText {
+	font-family: "Roboto", sans-serif;
+	font-size: 12px;
+	pointer-events: none;
+}
+
+.contriboverleftArrowText, .contriboverrightArrowText {
+	font-family: "Arial", sans-serif;
+	font-size: 20px;
+	pointer-events: none;
+}
+
+.contriboverDonorsPanelTitle, .contriboverBarChartPanelTitle {
+	font-family: "Roboto", sans-serif;
+	font-size: 18px;
+	fill: #444;
+}
+
+.contriboveraAxisBarsGroup path, .contriboveraAxisBarsGroup line {
+	stroke: none;
+}
+
+.contriboveraAxisBarsGroup text {
+	font-family: "Roboto", sans-serif;
+	font-size: 12px;
+	fill: darkslategray;
+	pointer-events: none;
+}
+
+.contriboverbarsLabels, .contriboverbarsLabelsSpan {
+	text-anchor: middle;
+	font-family: "Roboto", sans-serif;
+	font-size: 12px;
+	fill: #444;
+	pointer-events: none;
+}
+
+.contriboverDonorsPanelTitleSpan, .contriboverCbpfsPanelTitleSpan {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	fill: #666;
+}
+
+.contriboverDownloadText {
+	font-family: "Arial", sans-serif;
+	font-size: 10px;
+	fill: #666;
+}
+
+.contriboverDonorLabel, .contriboverCbpfLabel {
+	font-family: "Roboto", sans-serif;
+	font-size: 12px;
+	fill: #666;
+	pointer-events: none;
+	dominant-baseline: central;
+}
+
+.contriboverDonorLabelPercentage {
+	font-family: "Roboto", sans-serif;
+	font-size: 10px;
+	fill: #aaa;
+	pointer-events: none;
+}
+
+.contribovergroupYAxisDonorsFake {
+	font-family: "Roboto", sans-serif;
+	font-size: 12px;
+	fill: darkslategray;
+	pointer-events: none;
+}
+
+.contribovergroupYAxisDonors text, .contribovergroupYAxisCbpfs text {
+	font-family: "Roboto", sans-serif;
+	font-size: 12px;
+	fill: darkslategray;
+	pointer-events: none;
+}
+
+.contribovergroupYAxisDonors path, .contribovergroupYAxisDonors line, .contribovergroupYAxisCbpfs path, .contribovergroupYAxisCbpfs line {
+	stroke: none;
+}
+
+.contribovergroupXAxisDonors text, .contribovergroupXAxisCbpfs text{
+	font-family: "Roboto", sans-serif;
+	font-size: 10px;
+	fill: #aaa;
+	pointer-events: none;
+}
+
+.contribovergroupXAxisDonors path, .contribovergroupXAxisCbpfs path{
+	stroke: none;
+}
+
+.contribovergroupXAxisDonors line, .contribovergroupXAxisCbpfs line{
+	stroke: #ddd;
+	stroke-dasharray: 2, 2;
+}
+
+.contriboverAnnotationMainText {
+	font-family: "Arial", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	pointer-events: none;
+	fill: white;
+}
+
+.contriboverSvgLegend {
+	font-family: "Roboto", sans-serif;
+	font-size: 11px;
+	fill: #666;
+	pointer-events: none;	
+}
+
+#contriboverSnapshotTooltip {
+	z-index: 1600;
+}
+
+.contriboverSnapshotContent {
+	position: absolute;
+	min-width: 100px;
+	display: none;
+	background-color: #f9f9f9;
+	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.25);
+	cursor: pointer;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.contriboverSnapshotContent #contriboverSnapshotPdfText, .contriboverSnapshotContent #contriboverSnapshotPngText, .contriboverSnapshotContent #contriboverSnapshotTooltipPdfText, .contriboverSnapshotContent #contriboverSnapshotTooltipPngText {
+	font-size: 14px;
+	padding: 10px;
+	margin: 0px;
+	color: #222;
+	font-family: "Arial", sans-serif;
+}
+
+.contriboverSnapshotContent #contriboverBestVisualizedText, .contriboverSnapshotContent #contriboverTooltipBestVisualizedText {
+	font-size: 11px;
+	padding: 10px;
+	margin: 0px;
+	color: #222;
+	font-family: "Arial", sans-serif;
+	border-top: 1px solid lightgray;
+	width: 202px;
+}
+
+.contriboverSnapshotContent #contriboverSnapshotPdfText:hover, .contriboverSnapshotContent #contriboverSnapshotPngText:hover, .contriboverSnapshotContent #contriboverSnapshotTooltipPdfText:hover, .contriboverSnapshotContent #contriboverSnapshotTooltipPngText:hover {
+	background-color: #1F69B3;
+	color: white;
+}
