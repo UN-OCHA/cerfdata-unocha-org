@@ -19,10 +19,12 @@
 		formatPercent = d3.format(".0%"),
 		formatNumberSI = d3.format(".3s"),
 		flagWidth = 100,
-		flagHeight = 80,
+		flagHeight = 60,
+		flagDivHeight = 80,
 		donorDivWidth = 110,
 		donorDivNameHeight = 30,
-		donorDivHeight = donorDivNameHeight + flagHeight,
+		donorDivValueHeigh = 16,
+		donorDivHeight = donorDivNameHeight + flagDivHeight + donorDivValueHeigh,
 		localVariable = d3.local(),
 		othersId = "others",
 		paidColor = "#9063CD",
@@ -31,6 +33,7 @@
 		highlightColor = "#F79A3B",
 		buttonsNumber = 14,
 		chartTitleDefault = "CERF Contributions",
+		maxDonorString = 30,
 		contributionsTotals = {},
 		countryNames = {},
 		yearsArray = [],
@@ -44,6 +47,7 @@
 			"M40.614,57.349c0,0.84,0.299,1.615,0.898,2.324c0.599,0.729,1.504,1.303,2.718,1.745v-8.177 c-1.104,0.306-1.979,0.846-2.633,1.602C40.939,55.61,40.614,56.431,40.614,57.349z",
 			"M73.693,30.584H19.276c0,0-26.133,20.567-17.542,58.477c0,0,2.855,10.938,15.996,10.938h57.54 c13.125,0,15.97-10.938,15.97-10.938C99.827,51.151,73.693,30.584,73.693,30.584z M56.832,80.019 c-2.045,1.953-4.89,3.151-8.535,3.594v4.421H44.23v-4.311c-3.232-0.318-5.853-1.334-7.875-3.047 c-2.018-1.699-3.307-4.102-3.864-7.207l7.314-0.651c0.3,1.25,0.856,2.338,1.677,3.256c0.823,0.911,1.741,1.575,2.747,1.979v-9.903 c-3.659-0.879-6.348-2.22-8.053-3.997c-1.716-1.804-2.565-3.958-2.565-6.523c0-2.578,0.96-4.753,2.897-6.511 c1.937-1.751,4.508-2.767,7.721-3.034v-2.344h4.066v2.344c2.969,0.306,5.338,1.159,7.09,2.565c1.758,1.406,2.877,3.3,3.372,5.658 l-7.097,0.774c-0.43-1.849-1.549-3.118-3.365-3.776v9.238c4.485,1.035,7.539,2.357,9.16,3.984c1.634,1.635,2.441,3.725,2.441,6.289 C59.898,75.656,58.876,78.072,56.832,80.019z"
 		],
+		blankFlag = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
 		duration = 1000,
 		shortDuration = 500,
 		titlePadding = 24,
@@ -596,17 +600,14 @@
 				.attr("y", topPanel.height - topPanel.mainValueVerPadding * 2.7)
 				.attr("x", topPanel.moneyBagPadding + topPanel.leftPadding[0] + topPanel.mainValueHorPadding);
 
-			const receivedOrDonated = chartState.selectedDonors.length ? " donated in " : " received in ";
-
 			topPanelMainText.transition()
 				.duration(duration)
 				.style("opacity", 1)
 				.text(function(d) {
-					const yearsText = chartState.selectedYear.length === 1 ? chartState.selectedYear[0] : "selected years\u002A";
 					const valueSI = formatSIFloat(d);
 					const unit = valueSI[valueSI.length - 1];
 					return (unit === "k" ? "Thousand" : unit === "M" ? "Million" : unit === "G" ? "Billion" : "") +
-						receivedOrDonated + yearsText;
+						" contributions";
 				});
 
 			let topPanelSubText = mainValueGroup.selectAll("." + classPrefix + "topPanelSubText")
@@ -624,12 +625,7 @@
 			topPanelSubText.transition()
 				.duration(duration)
 				.style("opacity", 1)
-				.text(function(d) {
-					return "(Total " +
-						(chartState.selectedContribution === "total" ? "Contributions" :
-							chartState.selectedContribution === "pledge" ? "Pledged" : "Paid") +
-						")"
-				});
+				.text("for " + (chartState.selectedYear.length === 1 ? chartState.selectedYear[0] : "selected years\u002A"));
 
 			let topPanelDonorsNumber = mainValueGroup.selectAll("." + classPrefix + "topPanelDonorsNumber")
 				.data([donorsNumber]);
@@ -982,9 +978,14 @@
 
 			const flags = donorDivEnter.append("div")
 				.attr("class", classPrefix + "flags")
-				.style("height", flagHeight + "px")
+				.style("height", flagDivHeight + "px")
 				.append("img")
-				.attr("src", d => flagsData[d.isoCode])
+				.style("max-width", flagWidth + "px")
+				.attr("height", flagHeight + "px")
+				.attr("src", d => {
+					if (!flagsData[d.isoCode]) console.warn("Missing flag: " + d.donor, d);
+					return flagsData[d.isoCode] || blankFlag;
+				})
 				.attr("alt", d => d.donor);
 
 			const donorName = donorDivEnter.append("div")
@@ -993,16 +994,21 @@
 
 			const donorNameText = donorName.append("span")
 				.attr("class", classPrefix + "donorNameText")
-				.html(d => d.donor + " ")
-				.append("span")
-				.attr("class", classPrefix + "donorNameValue")
+				.html(d => d.donor.length > maxDonorString ? d.donor.substring(0, maxDonorString) + "..." : d.donor);
+
+			const donorValue = donorDivEnter.append("div")
+				.attr("class", classPrefix + "donorValue")
+				.style("height", donorDivValueHeigh + "px");
+
+			const donorValueText = donorValue.append("span")
+				.attr("class", classPrefix + "donorValueText")
 				.html("0");
 
 			donorDiv = donorDivEnter.merge(donorDiv);
 
 			donorDiv.order();
 
-			donorDiv.select("." + classPrefix + "donorNameValue")
+			donorDiv.select("." + classPrefix + "donorValueText")
 				.transition()
 				.duration(duration)
 				.tween("html", (d, i, n) => {
