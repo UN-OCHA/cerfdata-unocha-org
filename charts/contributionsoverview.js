@@ -14,7 +14,7 @@
 		localStorageTime = 3600000,
 		csvDateFormat = d3.utcFormat("_%Y%m%d_%H%M%S_UTC"),
 		fadeOpacity = 0.3,
-		contributionType = ["paid", "pledge", "total"],
+		contributionType = ["pledge", "paid", "total"],
 		formatMoney0Decimals = d3.format(",.0f"),
 		formatPercent = d3.format(".0%"),
 		formatNumberSI = d3.format(".3s"),
@@ -42,6 +42,7 @@
 		privateDonorsName = "Private Contributions",
 		privateDonorsIsoCode = "xprv",
 		vizNameQueryString = "contributions",
+		allYearsOption = "all",
 		bookmarkSite = "https://bi-home.gitlab.io/CBPF-BI-Homepage/bookmark.html?",
 		helpPortalUrl = "https://gms.unocha.org/content/business-intelligence#CBPF_Contributions",
 		dataUrl = "https://cbpfgms.github.io/pfbi-data/cerf_sample_data/CERF_ContributionTotal.csv",
@@ -297,7 +298,7 @@
 
 		function clickButtonsRects(d, singleSelection) {
 
-			if (singleSelection) {
+			if (singleSelection || d === allYearsOption || chartState.selectedYear[0] === allYearsOption) {
 				chartState.selectedYear = [d];
 			} else {
 				const index = chartState.selectedYear.indexOf(d);
@@ -312,9 +313,11 @@
 				};
 			};
 
-			const allYears = chartState.selectedYear.map(function(d) {
-				return d;
-			}).join("|");
+			const allYears = chartState.selectedYear[0] === allYearsOption ?
+				allYearsOption.toLowerCase() :
+				chartState.selectedYear.map(function(d) {
+					return d;
+				}).join("|");
 
 			if (queryStringValues.has("year")) {
 				queryStringValues.set("year", allYears);
@@ -550,6 +553,8 @@
 
 		function createTopPanel() {
 
+			let infoIconDiv, infoIcon;
+
 			contributionType.forEach(function(d) {
 				contributionsTotals[d] = d3.sum(data, function(e) {
 					return e[d]
@@ -631,7 +636,12 @@
 					const unit = valueSI[valueSI.length - 1];
 					return (unit === "k" ? "Thousand" : unit === "M" ? "Million" : unit === "G" ? "Billion" : "") +
 						" contributions";
-				});
+				})
+				.on("end", function() {
+					const thisBox = this.getBBox();
+					infoIcon.style("opacity", chartState.selectedYear[0] === allYearsOption ? 1 : 0);
+					infoIconDiv.attr("transform", "translate(" + (thisBox.x + thisBox.width + 4) + "," + (thisBox.y + 18) + ")");
+				})
 
 			let topPanelSubText = mainValueGroup.selectAll("." + classPrefix + "topPanelSubText")
 				.data([true]);
@@ -648,7 +658,7 @@
 			topPanelSubText.transition()
 				.duration(duration)
 				.style("opacity", 1)
-				.text("for " + (chartState.selectedYear.length === 1 ? chartState.selectedYear[0] : "selected years\u002A"));
+				.text("for " + (chartState.selectedYear.length === 1 ? (chartState.selectedYear[0] === allYearsOption ? "all years" : chartState.selectedYear[0]) : "selected years\u002A"));
 
 			let topPanelDonorsNumber = mainValueGroup.selectAll("." + classPrefix + "topPanelDonorsNumber")
 				.data([donorsNumber]);
@@ -743,11 +753,54 @@
 				.attr("x", topPanel.moneyBagPadding + topPanel.leftPadding[2] + topPanel.mainValueHorPadding)
 				.text("since inception in 2006");
 
+			infoIconDiv = topPanel.main.selectAll("." + classPrefix + "infoIconDiv")
+				.data([true]);
+
+			infoIconDiv = infoIconDiv.enter()
+				.append("g")
+				.attr("class", classPrefix + "infoIconDiv")
+				.merge(infoIconDiv);
+
+			infoIcon = infoIconDiv.selectAll("." + classPrefix + "infoIcon")
+				.data(chartState.selectedYear[0] === allYearsOption && chartState.selectedContribution === "total" ? [true] : []);
+
+			const infoIconExit = infoIcon.exit().remove();
+
+			infoIcon = infoIcon.enter()
+				.append("text")
+				.attr("class", classPrefix + "infoIcon")
+				.classed("contributionColorFill", true)
+				.style("font-family", "FontAwesome")
+				.style("font-size", "20px")
+				.style("cursor", "default")
+				.style("opacity", 0)
+				.text("\uf05a");
+
+			infoIcon.on("mouseover", function() {
+				const thisBox = this.getBoundingClientRect();
+				const containerBox = containerDiv.node().getBoundingClientRect();
+
+				const thisOffsetTop = thisBox.top - containerBox.top;
+
+				const thisOffsetLeft = thisBox.left - containerBox.left + thisBox.width + 14;
+
+				tooltip.style("display", "block")
+					.html("Includes paid and pledged contributions.");
+
+				tooltip.style("top", thisOffsetTop + "px")
+					.style("left", thisOffsetLeft + "px");
+			}).on("mouseout", function() {
+				if (isSnapshotTooltipVisible) return;
+				tooltip.style("display", "none");
+			});
+
 
 			//end of createTopPanel
 		};
 
 		function createButtonPanel() {
+
+			yearsArray.push(allYearsOption);
 
 			const clipPath = buttonPanel.main.append("clipPath")
 				.attr("id", classPrefix + "clip")
@@ -796,7 +849,7 @@
 					return chartState.selectedYear.indexOf(d) > -1 ? "white" : "#444";
 				})
 				.text(function(d) {
-					return d;
+					return d === allYearsOption ? capitalize(allYearsOption) : d;
 				});
 
 			const buttonsContributionsGroup = buttonPanel.main.append("g")
@@ -835,11 +888,7 @@
 					return d === chartState.selectedContribution ? "white" : "#444";
 				})
 				.text(function(d) {
-					if (d === "pledge") {
-						return "Pledged"
-					} else {
-						return capitalize(d);
-					};
+					return d === "pledge" ? "Pledged" : capitalize(d);
 				});
 
 			const leftArrow = buttonPanel.main.append("g")
@@ -881,17 +930,20 @@
 				.on("mouseout", mouseOutButtonsRects)
 				.on("click", function(d) {
 					const self = this;
-					if (d3.event.altKey) clickButtonsRects(d, true);
+					if (d3.event.altKey) {
+						clickButtonsRects(d, false);
+						return;
+					};
 					if (localVariable.get(this) !== "clicked") {
 						localVariable.set(this, "clicked");
 						setTimeout(function() {
 							if (localVariable.get(self) === "clicked") {
-								clickButtonsRects(d, false);
+								clickButtonsRects(d, true);
 							};
 							localVariable.set(self, null);
 						}, 250);
 					} else {
-						clickButtonsRects(d, true);
+						clickButtonsRects(d, false);
 						localVariable.set(this, null);
 					};
 				});
@@ -1116,11 +1168,30 @@
 					const containerBox = containerDiv.node().getBoundingClientRect();
 
 					tooltip.style("display", "block")
-						.html("<div style='margin-bottom:12px;color:#222;font-size:14px;font-weight:500;'>" + (d.isoCode === privateDonorsIsoCode ? privateDonorsName : d.donor) + "</div><div style='margin:0px;display:flex;flex-wrap:wrap;width:256px;'><div style='display:flex;flex:0 54%;'>Total contributions:</div><div style='display:flex;flex:0 46%;justify-content:flex-end;'><span class='contributionColorHTMLcolor'>$" + formatMoney0Decimals(d.total) +
-							"</span></div><div style='display:flex;flex:0 54%;white-space:pre;'>Total pledged <span style='color: #888;'>(" + (formatPercentCustom(d.pledge, d.total)) +
-							")</span>:</div><div style='display:flex;flex:0 46%;justify-content:flex-end;'><span class='contributionColorHTMLcolor'>$" + formatMoney0Decimals(d.pledge) + "</span></div><div style='display:flex;flex:0 54%;white-space:pre;'>Total paid <span style='color: #888;'>(" + (formatPercentCustom(d.paid, d.total)) +
-							")</span>:</div><div style='display:flex;flex:0 46%;justify-content:flex-end;'><span class='contributionColorHTMLcolor'>$" + formatMoney0Decimals(d.paid) +
-							"</span></div></div>");
+						.html(null);
+
+					const innerTooltipDiv = tooltip.append("div")
+						.attr("class", classPrefix + "innerTooltipDiv");
+
+					const topDiv = innerTooltipDiv.append("div")
+						.attr("class", classPrefix + "topDiv")
+						.html(d.isoCode === privateDonorsIsoCode ? privateDonorsName : d.donor);
+
+					const valuesContainerDiv = innerTooltipDiv.append("div")
+						.attr("class", classPrefix + "valuesContainerDiv");
+
+					contributionType.forEach(function(type) {
+						const textDiv = valuesContainerDiv.append("div")
+							.attr("class", classPrefix + "textDiv")
+							.html("Total " + (type === "total" ? "contributions " : type === "pledge" ? "pledged " : "paid ") + "<span class=" + classPrefix + "textDivPercentage></span>:");
+
+						textDiv.select("span")
+							.html(type === "total" ? "" : "(" + formatPercentCustom(d[type], d.total) + ")");
+
+						const valueDiv = valuesContainerDiv.append("div")
+							.attr("class", classPrefix + "valueDiv")
+							.html(formatMoney0Decimals(d[type]));
+					});
 
 					const tooltipBox = tooltip.node().getBoundingClientRect();
 
@@ -1194,7 +1265,7 @@
 		function mouseOverButtonsRects(d) {
 			tooltip.style("display", "block")
 				.style("width", "200px")
-				.html("Click for selecting a year. Double-click or ALT + click for selecting a single month.");
+				.html(d === allYearsOption ? "Click to show all years" : "Click for selecting a single year. Double-click or ALT + click for selecting multiple years.");
 
 			const containerSize = containerDiv.node().getBoundingClientRect();
 
@@ -1254,7 +1325,7 @@
 
 		const aggregatedDonors = rawData.reduce((acc, curr) => {
 
-			if (chartState.selectedYear.indexOf(+curr.FiscalYear) > -1) {
+			if (chartState.selectedYear[0] === allYearsOption || chartState.selectedYear.indexOf(+curr.FiscalYear) > -1) {
 
 				if (!curr.GMSDonorISO2Code) console.warn("Donor " + curr.GMSDonorName + " has no ISO code");
 
@@ -1661,6 +1732,10 @@
 	};
 
 	function validateYear(yearString) {
+		if (yearString.toLowerCase() === allYearsOption) {
+			chartState.selectedYear.push(allYearsOption);
+			return;
+		};
 		const allYears = yearString.split(",").map(function(d) {
 			return +(d.trim());
 		}).sort(function(a, b) {
