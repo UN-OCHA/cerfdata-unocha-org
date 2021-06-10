@@ -629,13 +629,13 @@
 
 		const data = processData(rawData);
 
-		verifyCentroids(data.map);
-
 		//createTitle(rawData);
 
 		createButtonsPanel(rawData);
 
 		createMap(mapData);
+		
+		verifyCentroids(data.map);
 
 		createZoomButtons();
 
@@ -1015,6 +1015,9 @@
 			.attr("class", classPrefix + "showNamesText")
 			.attr("x", 16)
 			.attr("y", 11)
+			.style("stroke", "white")
+			.style("stroke-width", "2px")
+			.style("paint-order", "stroke")
 			.text("Show All");
 
 		showNamesGroup.on("click", function() {
