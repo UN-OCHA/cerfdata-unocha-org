@@ -18,6 +18,15 @@
     <script type="text/javascript" src="assets/js/html2canvas.min.js"></script>
     <script src="assets/js/CheckBrowserCompatibility.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1884029-23"></script>
+    <style>			
+		.pf-onebi-logo{background-repeat: no-repeat; background-size: contain; background-position: center left; background-image: url(assets/img/cerf-data-hub-logo.svg); float: left; margin: 0; text-indent: 58px; min-width: 300px; height: 50px;}	
+		@media (min-width: 576px) {	
+          .navbar {	
+              padding-top: 1rem !important;	
+              padding-bottom: 1rem !important;	
+          }	
+        }
+	</style>
 </head>
 <body id="page-top">
 	<div class="cd-header">
@@ -77,18 +86,18 @@
             </div>
         </div>
 	</div>
-	<nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
-		<div class="container"><a class="navbar-brand js-scroll-trigger pf-onebi-logo" href="#page-top"><strong>CERF DATA HUB</strong><br></a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-align-justify"></i></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="nav navbar-nav ml-auto font-weight-bold text-uppercase">
-                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="index.html#page-top">Home</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#Allocations">Allocations</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#Contributions">Contributions</a></li>
-                    <!--<li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="data.html">Data Explorer</a></li>-->
-                </ul>
-            </div>	
-        </div>
+	<nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">	
+		<div class="container"><a class="navbar-brand js-scroll-trigger pf-onebi-logo" href="#page-top"><br></a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive"	
+                aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-align-justify"></i></button>	
+            <div class="collapse navbar-collapse" id="navbarResponsive">	
+                <ul class="nav navbar-nav ml-auto font-weight-bold text-uppercase" aria-labelledby="navbarDropdownMenuLink">	
+                    <li class="nav-item role="presentation"><a class="nav-link js-scroll-trigger" href="#Allocations" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Allocations</a>	
+					</li>	
+                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#Contributions">Contributions</a></li>	
+                    <!--<li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="data.html">Data Explorer</a></li>-->	
+                </ul>	
+            </div>		
+        </div>	
 	</nav>
 	<header class="masthead d-flex header-panel">		
 		<div class="container my-auto">
@@ -151,23 +160,28 @@
 	</header>
 	<section>
 		<div class="container">
-			<div class="row">
-				<div class="col intro-txt mt-3 mb-4">	
-					<p class="mt-3">Since January 2021, CERF has allocated $<span id="spnAllocAmount"></span> to <span id="spnAllocPartner"></span> partners to support <span id="spnAllocProject"></span> critical humanitarian projects this year. These projects targeted millions of people with healthcare, food aid, clean water, shelter, and other life-saving assistances.</p>					
+            <div class="row">
+				<div class="col text-center mb-2 pt-5 link-style d-flex justify-content-left position-relative">					
+					<a class="txt-header text-uppercase js-scroll-trigger" href="#" role="button"><i class="fa fa-globe f-a mr-1 font-09em clr-grey"></i> CERF - BY YEAR</a><!--<button class="video-btn" data-toggle="modal" data-src="https://ocha.fleeq.io/l/s7q22qmqus-53e65u965e" data-target="#myModal"><span class="video-info"><i class="fa fa-play-circle fa-2x"></i></span></button>-->
 				</div>
 			</div>
+            <div class="row">  	
+				<div class="border-top pt-3">	
+                	<div id="d3chartcontainercesank" data-title=" " data-year="2021" data-responsive="false" data-lazyload="true"></div><script type="text/javascript" src="charts/sankeydiagram.js"></script>	
+				</div>	
+            </div>
 		</div>
 	</section>
 	<section id="Allocations">
 		<div class="container">
 			<div class="row">
-				<div class="col text-center mb-2 pt-5 link-style d-flex justify-content-left position-relative">					
+				<div class="col text-center mt-5 mb-2 pt-5 link-style d-flex justify-content-left position-relative">						
 					<a class="txt-header text-uppercase js-scroll-trigger" href="#Allocations" role="button"><i class="fa fa-map-o f-a mr-1 font-09em clr-grey"></i> Allocations</a><!--<button class="video-btn" data-toggle="modal" data-src="https://ocha.fleeq.io/l/s7q22qmqus-53e65u965e" data-target="#myModal"><span class="video-info"><i class="fa fa-play-circle fa-2x"></i></span></button>-->
 				</div>
 			</div>
 			<div class="row mb-5">
 				<div class="col">
-					<ul class="nav nav-tabs mb-4 pt-1 pb-1 d-none" id="myTab" role="tablist">
+					<ul class="nav nav-tabs mb-4 pt-1 pb-1" id="myTab" role="tablist">
   						<li class="nav-item waves-effect waves-light mr-4">
     						<a class="nav-link active" id="allocation-overview-tab" data-toggle="tab" href="#allocation-overview" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-map-o f-a mr-1"></i> Allocations Overview</a>
   						</li>
@@ -177,9 +191,6 @@
 						<div class="tab-pane active show" id="allocation-overview" role="tabpanel" aria-labelledby="allocation-overview-tab">
                             <div><div id="d3chartcontainerallocover" data-title=" " data-year="2021" data-cerfallocation="total" data-shownames="false" data-showhelp="false" data-showlink="false" data-responsive="true" data-lazyload="true"></div><script type="text/javascript" src="charts/allocationsoverview.js"></script></div>
                         </div>
-						<div class="tab-pane fade" id="allocation-profile" role="tabpanel" aria-labelledby="allocation-profile-tab">
-							<div><img src="assets/img/pf-one-bi-allocation-profile.png" alt="" class="img-fluid"></div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -189,7 +200,7 @@
 	<section id="Contributions">
 		<div class="container">
 			<div class="row">
-				<div class="col text-center mb-2 pt-5 link-style d-flex justify-content-left position-relative">					
+				<div class="col text-center mt-5 mb-2 pt-5 link-style d-flex justify-content-left position-relative">						
 					<a class="txt-header text-uppercase js-scroll-trigger" href="#Contributions" role="button"><i class="fa fa-bar-chart mr-1 clr-grey"></i> Contributions</a><!--<button class="video-btn" data-toggle="modal" data-src="https://ocha.fleeq.io/l/s7q22qmqus-53e65u965e" data-target="#myModal"><span class="video-info"><i class="fa fa-play-circle fa-2x"></i></span></button>-->
 				</div>
 			</div>
@@ -615,7 +626,6 @@
 	<script type="text/javascript" id="cookieinfo" src="assets/js/cookieinfo.min.js" data-bg="#002856" data-fg="#FFF" data-link="#FFF" data-cookie="CookieInfoScript" data-text-align="left" data-close-text="OK">
     </script>		
 	<script src="assets/js/respond.js"></script> 
-	<script src="assets/js/theme.js"></script>
 	<script src="assets/js/custom-one-bi.js"></script>	
 	<script src="assets/js/apiData.js"></script>
 </body>
