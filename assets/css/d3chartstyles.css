@@ -1280,3 +1280,977 @@ p#cesankd3chartTitle {
 	pointer-events: none;
 	text-anchor: middle;
 }
+
+
+/*Stacked area chart (code:  alloctimeline)*/
+
+#d3chartcontaineralloctimeline {
+	position: relative;
+	overflow-y: visible;
+	--unblue: #1f69b3;
+	--customblue: #06519c;
+	--customred: #9c291a;
+}
+
+#alloctimelineDownloadingDiv {
+	position: absolute;
+	background: #fcfcfc; 
+	border: 1px solid #666; 
+	border-radius: 8px;
+	pointer-events: none;
+	cursor: none;
+	width: 200px;
+	z-index: 1010;
+}
+
+#alloctimelinetooltipdiv {    
+	position: absolute;
+	text-align: left;
+	color: #333;
+	font-family: 'Roboto', sans-serif;
+	white-space: normal;	
+	line-height: 120%;
+	font-size: 14px;
+	padding: 8px;
+	background: #f2f4f4; 
+	border: 1px solid #3189c9; 
+	border-radius: 4px;
+	pointer-events: none;
+	cursor: none;
+	z-index: 1020;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+#alloctimelinedataTooltipdiv {    
+	position: absolute;
+	text-align: left;
+	color: #333;
+	font-family: 'Roboto', sans-serif;
+	white-space: normal;	
+	line-height: 120%;
+	font-size: 14px;
+	padding: 8px;
+	background: #ffffff; 
+	border: 1px solid #3189c9; 
+	border-radius: 4px;
+	pointer-events: none;
+	cursor: none;
+	z-index: 1040;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+#alloctimelinedataTooltipdiv:after,
+#alloctimelinedataTooltipdiv:before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+#alloctimelinedataTooltipdiv:after {
+    top: 100%;
+    border-color: white transparent transparent transparent;
+    border-width: 10px;
+}
+
+#alloctimelinedataTooltipdiv:before {
+    top: 100%;
+    border-color: #3189c9 transparent transparent transparent;
+    border-width: 12px;
+}
+
+.alloctimelineTopDiv {
+	display: flex;
+	width: 100%;
+	margin-bottom: 4px;
+}
+
+.alloctimelineTitleDiv {
+	display: flex;
+	flex:0 50%;
+	margin-left: 8px;
+}
+
+.alloctimelineIconsDiv {
+	display: flex;
+	flex:0 50%;
+	flex-direction: row-reverse;
+	align-items: center;
+	margin-right: 16px;
+	z-index: 500;
+}
+
+.alloctimelineFooterDiv {
+	width: 100%;
+	margin-top: 8px;
+}
+
+.alloctimelineYearsDescriptionDiv {
+	margin-left: 22px;
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	color: #888;
+	width: 98%;
+}
+
+p#alloctimelined3chartTitle {
+	font-size: 26px;
+	font-family: "Arial", sans-serif;
+	margin: 0px;
+	color: #418fde;
+}
+
+.alloctimelinebuttonsText {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	pointer-events: none;
+}
+
+#alloctimelineSnapshotTooltip {
+	z-index: 1600;
+}
+
+.alloctimelineSnapshotContent {
+	position: absolute;
+	min-width: 100px;
+	display: none;
+	background-color: #f9f9f9;
+	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.25);
+	cursor: pointer;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.alloctimelineSnapshotContent #alloctimelineSnapshotPdfText, .alloctimelineSnapshotContent #alloctimelineSnapshotPngText, .alloctimelineSnapshotContent #alloctimelineSnapshotTooltipPdfText, .alloctimelineSnapshotContent #alloctimelineSnapshotTooltipPngText {
+	font-size: 14px;
+	padding: 10px;
+	margin: 0px;
+	color: #222;
+	font-family: "Arial", sans-serif;
+}
+
+.alloctimelineSnapshotContent #alloctimelineBestVisualizedText, .alloctimelineSnapshotContent #alloctimelineTooltipBestVisualizedText {
+	font-size: 11px;
+	padding: 10px;
+	margin: 0px;
+	color: #222;
+	font-family: "Arial", sans-serif;
+	border-top: 1px solid lightgray;
+	width: 202px;
+}
+
+.alloctimelineSnapshotContent #alloctimelineSnapshotPdfText:hover, .alloctimelineSnapshotContent #alloctimelineSnapshotPngText:hover, .alloctimelineSnapshotContent #alloctimelineSnapshotTooltipPdfText:hover, .alloctimelineSnapshotContent #alloctimelineSnapshotTooltipPngText:hover {
+	background-color: #1F69B3;
+	color: white;
+}
+
+.alloctimelineyearButtonsDiv {
+	width: 100%;
+	display: flex;
+	margin-bottom: 6px;
+	margin-top: 8px;
+	align-items: center;
+	overflow-y: auto;
+	height: 30px;
+	scrollbar-width: thin;
+  scrollbar-color: lightgray white;
+}
+
+.alloctimelineyearButtonsDiv::-webkit-scrollbar {
+  height: 12px;               /* width of the entire scrollbar */
+}
+
+.alloctimelineyearButtonsDiv::-webkit-scrollbar-track {
+  background: transparent;        /* color of the tracking area */
+}
+
+.alloctimelineyearButtonsDiv::-webkit-scrollbar-thumb {
+  background-color: #eee;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid #fff;  /* creates padding around scroll thumb */
+}
+
+.alloctimelineyearButtonsDiv button, .alloctimelineselectViewDiv button {
+  margin: 0px 0px 0px 8px;
+  display: inline-flex;
+  align-items: center; 
+  white-space: pre;
+  border: 1px solid #BCBEC0;
+  font-size: 0.8rem;
+  padding: 2px 10px 2px 10px;
+  border-radius: 3px;
+  background-color: #eee;
+  line-height: normal;
+  transition: all 0.2s linear;
+  outline: 0;
+  cursor: pointer;
+}
+
+.alloctimelineyearButtonsDiv button:hover, .alloctimelineselectViewDiv button:hover{
+	background-color: #3289C9; 
+	color:#fff; 
+	border-color:#3289C9;
+}
+
+.alloctimelineyearButtonsDiv button.active, .alloctimelineselectViewDiv button.active{
+	background-color: #3289C9; 
+	color:#fff; 
+	border-color:#3289C9;
+}
+
+.alloctimelinebottomFiltersDiv {
+	width: 100%;
+	display: flex;
+	margin-bottom: 8px;
+	align-items: center;
+	height: 30px;
+	padding-left: 8px;
+}
+
+.alloctimelinedropdownDiv {
+	display: flex;
+	flex: 0 70%;
+	height: 100%;
+	font-family: "Roboto", sans-serif;
+	font-size: 14px;
+	z-index: 900;
+}
+
+.alloctimelineselectViewDiv {
+	display: flex;
+	flex: 0 30%;
+	height: 100%;
+	justify-content: flex-end;
+	padding-right: 8px;
+}
+
+.alloctimelineregionContainer, .alloctimelinefundContainer, .alloctimelineemergencyContainer, .alloctimelineallocationTypesContainer {
+	height: 100%;
+	position: relative;
+	margin-right: 0.8rem;
+}
+
+.alloctimelinefilterContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color:  #555;
+	cursor: pointer;
+}
+
+.alloctimelineregionTitleDiv, .alloctimelinefundTitleDiv, .alloctimelineemergencyTitleDiv, .alloctimelineallocationTypesTitleDiv {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	background: #f2f4f4; 
+	border: 1px solid #3189c9; 
+	border-radius: 4px;
+	padding: 2px 12px 2px 16px;
+	cursor: pointer;
+}
+
+.alloctimelineregionTitle, .alloctimelinefundTitle, .alloctimelineemergencyTitle, .alloctimelineallocationTypesTitle {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.alloctimelineregionArrow, .alloctimelinefundArrow, .alloctimelineemergencyArrow, .alloctimelineallocationTypesArrow {
+	margin-left: 0.4rem;
+	font-weight: bold;
+	transition: transform 0.25s ease-in-out;
+}
+
+.alloctimelineregionDropdown, .alloctimelinefundDropdown, .alloctimelineemergencyDropdown, .alloctimelineallocationTypesDropdown {
+	position: absolute;
+	margin-top: 4px;
+	padding: 2px 16px 2px 16px;
+	background: #f2f4f4; 
+	border: 1px solid #3189c9; 
+	border-radius: 4px;
+	max-height: 400px;
+	overflow-y: scroll;
+	white-space: nowrap;
+	font-family: "Roboto", sans-serif;
+	font-size: 13px;
+	transform-origin: 50% 0;
+	transform: scale(1, 0);
+	transition: transform 0.25s ease-in-out;
+}
+
+.alloctimelineregionContainer.active .alloctimelineregionDropdown, .alloctimelinefundContainer.active .alloctimelinefundDropdown, .alloctimelineemergencyContainer.active .alloctimelineemergencyDropdown, .alloctimelineallocationTypesContainer.active .alloctimelineallocationTypesDropdown {
+	transform: scale(1, 1);
+}
+
+.alloctimelineemergencyDropdown{overflow-y: hidden !important;}
+
+.alloctimelineregionContainer.active .alloctimelineregionArrow, .alloctimelinefundContainer.active .alloctimelinefundArrow, .alloctimelineemergencyContainer.active .alloctimelineemergencyArrow, .alloctimelineallocationTypesContainer.active .alloctimelineallocationTypesArrow {
+	transform: rotate(180deg);
+}
+
+.alloctimelineregionCheckboxDiv label, .alloctimelinefundCheckboxDiv label, .alloctimelineemergencyCheckboxDiv label, .alloctimelineallocationTypesCheckboxDiv label {
+	margin-bottom: 0px;
+}
+
+.alloctimelineregionCheckboxDiv input, .alloctimelinefundCheckboxDiv input, .alloctimelineemergencyCheckboxDiv input, .alloctimelineallocationTypesCheckboxDiv input {
+	vertical-align: text-top;
+}
+
+.alloctimelinecheckboxText {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	color: #333;
+	margin-left: 4px;
+}
+
+.alloctimelinecheckboxTextAllRegions, .alloctimelinecheckboxTextAllFunds, .alloctimelinecheckboxTextAllEmergencies, .alloctimelinecheckboxTextAllAllocationTypes {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	font-weight: 700;
+	margin-left: 4px;
+	color: var(--unblue);
+}
+
+.alloctimelinexAxisGroupAggregated text {
+	font-family: "Roboto", sans-serif;
+	font-size: 11px;
+	fill: #444;
+}
+
+.alloctimelinexAxisGroupByGroup text {
+	font-family: "Roboto", sans-serif;
+	font-size: 10px;
+	fill: #444;
+}
+
+.alloctimelinexAxisGroupAggregated line, .alloctimelinexAxisGroupByGroup line {
+	stroke: #666;
+}
+
+.alloctimelinexAxisGroupAggregated path, .alloctimelinexAxisGroupByGroup path {
+	stroke: none;
+}
+
+.alloctimelineyAxisGroupAggregated text, .alloctimelineyAxisGroupByGroup text {
+	font-family: "Roboto", sans-serif;
+	font-size: 11px;
+	fill: #666;
+}
+
+.alloctimelineyAxisGroupAggregated path, .alloctimelineyAxisGroupByGroup path {
+	stroke: none;
+}
+
+.alloctimelineyAxisGroupAggregated line, .alloctimelineyAxisGroupByGroup line {
+	stroke: #ccc;
+	stroke-dasharray: 3, 3;
+}
+
+.alloctimelineyAxisGroupAggregated, .alloctimelineyAxisGroupByGroup {
+	pointer-events: none;
+}
+
+.alloctimelinesublegendGroup {
+	cursor: pointer;
+}
+
+.alloctimelinelegendGroupValue {
+	font-family: "Arial", sans-serif;
+	font-size: 14px;
+	fill: #222;
+	dominant-baseline: central;
+}
+
+.alloctimelinelegendGroupName {
+	font-family: "Roboto", sans-serif;
+	font-size: 12px;
+	fill: #666;
+	dominant-baseline: central;
+}
+
+.alloctimelineareaPaths, .alloctimelineareaPathsByGroup {
+	cursor: pointer;
+}
+
+.alloctimelinesublegendGroup text {
+	font-size: 10px;
+	font-family: "Roboto", sans-serif;
+	fill:  #666;
+	font-style: italic;
+	dominant-baseline: central;
+}
+
+input:disabled + span.alloctimelinecheckboxText {
+	opacity: 0.5;
+}
+
+.alloctimelinenoDataText {
+	text-anchor: middle;
+	font-family: "Roboto", sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	fill:  #444;
+}
+
+.alloctimelinetotalLabel, .alloctimelinetotalLabelByGroup {
+	fill: var(--unblue);
+	font-size: 10px;
+	font-family: "Roboto", sans-serif;
+	text-anchor: middle;
+	font-weight: bold;
+	stroke: white;
+	stroke-width: 2px;
+	paint-order: stroke;
+}
+
+.alloctimelinenumberOfFundsTitle {
+	text-anchor: end;
+	font-family: "Roboto", sans-serif;
+	font-size: 12px;
+	fill: var(--customblue);	
+}
+
+.alloctimelinenumberOfFunds {
+	text-anchor: middle;
+	font-family: "Roboto", sans-serif;
+	font-size: 12px;
+	font-weight: 500;
+	fill: var(--customblue);	
+}
+
+.alloctimelinenumberOfFundsTitleByGroup {
+	text-anchor: end;
+	font-family: "Roboto", sans-serif;
+	font-size: 10px;
+	fill: var(--customblue);	
+}
+
+.alloctimelinenumberOfFundsByGroup {
+	text-anchor: middle;
+	font-family: "Roboto", sans-serif;
+	font-size: 10px;
+	font-weight: 500;
+	fill: var(--customblue);	
+}
+
+.alloctimelinearrowChevron {
+	font-size: 52px;
+	fill:  white;
+	font-weight: bold;
+	dominant-baseline: middle;
+	text-anchor: middle;
+}
+
+.alloctimelinearrowChevronByGroup {
+	font-size: 38px;
+	fill:  white;
+	font-weight: bold;
+	dominant-baseline: middle;
+	text-anchor: middle;
+}
+
+.alloctimelinetooltipTopValue {
+	font-family: "Arial", sans-serif;
+	font-size: 22px;
+	color: #222;
+	margin-bottom: 4px;
+	margin-top: 12px;
+}
+
+.alloctimelinetooltipDate {
+	font-family: "Roboto", sans-serif;
+	font-size: 12px;
+	color: #666;
+	text-transform: uppercase;
+	margin-bottom: 12px;
+}
+
+.alloctimelinetooltipEmergencyGroups {
+	width:  100%;
+	display: flex;
+	align-items: center;
+	height: 1.4em;
+}
+
+.alloctimelinetooltipCircle {
+	font-size: 8px;
+	font-family: "Arial", sans-serif;
+}
+
+.alloctimelinetooltipValue {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	color: #222;
+	margin-left: 6px;
+}
+
+.alloctimelinetooltipGroupName {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	color: #666;
+	margin-left: 6px;
+}
+
+/*Contributions chart (code: contributionschart)*/
+#d3chartcontainercontributionschart{
+	position: relative;
+	--color: #FBD45C;
+	--colorlight:  #FCE59D;
+}
+
+.contributionschartTopDiv {
+	display: flex;
+	width: 100%;
+	margin-bottom: 4px;
+}
+
+.contributionschartTitleDiv {
+	display: flex;
+	flex:0 50%;
+	margin-left: 8px;
+}
+
+.contributionschartIconsDiv {
+	display: flex;
+	flex:0 50%;
+	flex-direction: row-reverse;
+	align-items: center;
+	margin-right: 16px;
+}
+
+.contributionschartFooterDiv {
+	width: 100%;
+	margin-top: 8px;
+}
+
+#contributionschartSnapshotTooltip {
+	z-index: 1600;
+}
+
+.contributionschartSnapshotContent {
+	position: absolute;
+	min-width: 100px;
+	display: none;
+	background-color: #f9f9f9;
+	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.25);
+	cursor: pointer;
+	border-radius: 4px;
+	overflow: hidden;
+	text-align: left;
+}
+
+.contributionschartSnapshotContent #contributionschartSnapshotPdfText, .contributionschartSnapshotContent #contributionschartSnapshotPngText, .contributionschartSnapshotContent #contributionschartSnapshotTooltipPdfText, .contributionschartSnapshotContent #contributionschartSnapshotTooltipPngText {
+	font-size: 14px;
+	padding: 10px;
+	margin: 0px;
+	color: #222;
+	font-family: "Arial", sans-serif;
+}
+
+.contributionschartSnapshotContent #contributionschartBestVisualizedText, .contributionschartSnapshotContent #contributionschartTooltipBestVisualizedText {
+	font-size: 11px;
+	padding: 10px;
+	margin: 0px;
+	color: #222;
+	font-family: "Arial", sans-serif;
+	border-top: 1px solid lightgray;
+	width: 202px;
+}
+
+.contributionschartSnapshotContent #contributionschartSnapshotPdfText:hover, .contributionschartSnapshotContent #contributionschartSnapshotPngText:hover, .contributionschartSnapshotContent #contributionschartSnapshotTooltipPdfText:hover, .contributionschartSnapshotContent #contributionschartSnapshotTooltipPngText:hover {
+	background-color: #1F69B3;
+	color: white;
+}
+
+p#contributionschartd3chartTitle {
+	font-size: 26px;
+	font-family: "Arial", sans-serif;
+	margin: 0px;
+	color: #418fde;
+}
+
+.contributionschartheaderDiv {
+	display: flex;
+	line-height: normal;
+	margin-bottom: 2rem;
+	margin-top: 1rem;
+}
+
+.contributionscharttopFiguresDiv {
+	flex: 0 30%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.contributionscharttopFiguresHeaderDiv {
+	width: 50%;
+	text-align: right;
+	font-size: 1rem;
+	color: #444;
+}
+
+.contributionscharttopFiguresDonorsDiv, .contributionscharttopFiguresContributionsDiv {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.contributionscharttopFiguresDonorsNumberDiv, .contributionscharttopFiguresContributionsNumberDiv {
+	flex: 0 50%;
+	text-align: right;
+	font-size: 3rem;
+}
+
+.contributionscharttopFiguresDonorsTextDiv, .contributionscharttopFiguresContributionsTextDiv {
+	flex: 0 50%;
+	font-size: 1rem;
+	color: #444;
+	text-align: left;
+	line-height: 1.3rem;
+	padding-left: 0.5rem;
+}
+
+.contributionscharttopChartDiv {
+	flex: 0 40%;
+	flex-direction: column;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.contributionscharttopChartSvgDiv {
+	flex: 0 85%;
+	height: 85%;
+}
+
+.contributionscharttopChartHeaderDiv {
+	font-size: 0.8rem;
+	color:  #444;
+	font-style: italic;
+}
+
+.contributionscharttopRadioButtonsDiv {
+	flex: 0 30%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.contributionscharttopRadioButtonsDonorsDiv, .contributionscharttopRadioButtonsOrderDiv {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding-left: 2rem;
+}
+
+.contributionschartdonorLabels, .contributionschartorderLabels {
+	font-size: 0.9rem;
+  color: var(--color);
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-gap: 0.5em;
+  cursor: pointer;
+}
+
+.contributionschartradioInput {
+	display: flex;
+}
+
+.contributionschartradioInput input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.contributionschartradioControl {
+  display: grid;
+  place-items: center;
+  width: 1.1em;
+	height: 1.1em;
+	border-radius: 50%;
+	border: 0.1em solid #bbb;
+	transform: translateY(-0.05em);
+}
+
+.contributionschartradioInput input + .contributionschartradioControl::before {
+	 content: "";
+	 width: 0.7em;
+	 height: 0.7em;
+	 box-shadow: inset 0.5em 0.5em currentColor;
+	 border-radius: 50%;
+	 transition: 180ms transform ease-in-out;
+	 transform: scale(0);
+}
+
+.contributionschartradioInput input:checked + .contributionschartradioControl::before {
+	 transform: scale(1);
+}
+
+.contributionschartradioLabel {
+	line-height: 1;
+	color: #444;
+}
+
+.contributionschartchartsDiv {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(144px, 1fr));
+  padding-top: 4px;
+}
+
+.contributionschartchartsDiv > :last-child {
+    margin-bottom: 22px;
+}
+
+.contributionschartdonorDiv {
+  justify-self: center;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.contributionschartdonorNameDiv {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-right: 4px;
+  padding-left: 4px;
+  flex-grow: 1;
+}
+
+.contributionschartdonorNameDiv span {
+  font-size: 0.75rem;
+  padding-left: 0.2rem;
+  font-family: "Roboto", sans-serif;
+  color: #5f6969;
+  line-height: 1;
+}
+
+.contributionschartxAxisGroup text {
+  font-family: "Roboto", sans-serif;
+  font-size: 8px;
+  fill: #aaa;
+  font-weight: 300;
+  pointer-events: none;
+  letter-spacing: -0.25px;
+}
+
+.contributionschartxAxisGroupTopChart text {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  fill: #aaa;
+  font-weight: 300;
+  pointer-events: none;
+  letter-spacing: -0.25px;
+}
+
+.contributionschartxAxisGroup path, .contributionschartxAxisGroupTopChart path {
+  stroke: #ccc;
+}
+
+.contributionschartxAxisGroup line, .contributionschartxAxisGroupTopChart line {
+  stroke: #888;
+}
+
+.contributionschartbarLabel {
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  fill: #444;
+  pointer-events: none;
+  dominant-baseline: middle;
+  letter-spacing: -0.25px;
+}
+
+.contributionschartbarLabelTop {
+	font-size: 16px;
+	font-family: "Roboto", sans-serif;
+  fill: #444;
+  pointer-events: none;
+  dominant-baseline: middle;
+}
+
+.contributionschartallLabels {
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  fill: #444;
+  pointer-events: none;
+  dominant-baseline: ideographic;
+  text-anchor: middle;
+  letter-spacing: -0.25px;
+}
+
+.contributionschartallLabelsTop {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  fill: #444;
+  pointer-events: none;
+  dominant-baseline: ideographic;
+  text-anchor: middle;
+}
+
+.contributionschartdonorDivActive {
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0px 5px 10px 0px #aaa, 0px 2px 16px 16px rgba(0,0,0,0);  
+}
+
+.contributionschartdonorDivActive .contributionschartdonorNameDiv{
+	background-color: var(--colorlight);   
+	/*background-color: #3189c9; */ 
+  border-radius: 0 0 4px 4px;
+}
+
+/*.contributionschartdonorDivActive .contributionschartdonorNameDiv span{
+	color:#fff !important;
+}*/
+
+.contributionschartdonorExpandDiv {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  color: #aaa;
+  font-size: 20px;
+  text-align: center;
+  padding: 0px;
+  pointer-events: none;
+}
+
+#contributionscharttooltipDiv {    
+  position: absolute;
+  text-align: left;
+  color: darkslategray;
+  font-family: "Roboto", sans-serif;
+  white-space: normal;
+  padding: 0;
+  line-height: 120%;
+  font-size: 14px;
+  background: #f2f4f4; 
+  border: none; 
+  border-radius: 4px;
+  pointer-events: none;
+  cursor: none;
+  z-index: 1500;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.contributionscharttooltipTopDiv {
+  width: 100%;
+  display: flex;
+  margin-bottom: 6px;
+  align-items: center;
+}
+
+.contributionscharttooltipTopDivMain {
+  flex: 0 80%;
+}
+
+.contributionscharttooltipTopDivClose {
+  flex: 0 20%;
+  font-size: 25px;
+  text-align: right;
+}
+
+.contributionscharttooltipTopDivClose i {
+	color: #999;
+    font-weight: normal !important;
+}
+
+.contributionscharttooltipNameDiv {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.contributionscharttooltipNameDiv span {
+  padding-left: 0.5rem;
+  font-family: "Roboto", sans-serif;
+  line-height: 1;
+  font-size: 1rem;
+	color: #222;
+}
+
+#contributionscharttooltipDiv > div:nth-child(1){
+	width: 645px !important;
+    height: 335px !important;
+}
+
+#contributionscharttooltipDiv > div:nth-child(1) > div:nth-child(2) {
+	padding: 8px !important;
+}
+
+#contributionscharttooltipDiv .contributionscharttooltipTopDiv {
+	height: 35px !important;
+    background-color: var(--colorlight);
+    padding: 8px;
+    border-radius: 4px 4px 0 0;
+	margin-bottom: 0 !important;
+}
+
+#contributionscharttooltipDiv .contributionscharttooltipTopDiv .contributionscharttooltipTopDivMain .contributionscharttooltipNameDiv img{
+	width:25px !important;
+	height: 25px !important;
+}
+
+.contributionschartxAxisGroupTooltip line{
+  stroke: darkslategray;
+}
+
+.contributionschartxAxisGroupTooltip path, .contributionschartyAxisGroupTooltip path {
+  stroke: none;
+}
+
+.contributionschartxAxisGroupTooltip text {
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  fill: #666;
+}
+
+.contributionschartyAxisGroupTooltip text {
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  fill: #888;
+  pointer-events: none;
+}
+
+.contributionschartyAxisGroupTooltip line {
+  stroke: #ddd;
+  stroke-dasharray: 2, 2;
+}
+
+.contributionscharttooltipBarLabel {
+  font-family: "Roboto", sans-serif;
+  font-size: 11px;
+  pointer-events: none;
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+
+#contributionschartDownloadingDiv {
+  position: absolute;
+  padding: 8px;
+  background: #fcfcfc; 
+  border: 1px solid #999; 
+  border-radius: 8px;
+  pointer-events: none;
+  cursor: none;
+  min-width: 200px;
+  min-height: 100px;
+  z-index: 1500;
+}
+
+.contributionschartDownloadingDivSvg {
+  fill: #3289c9;
+}
