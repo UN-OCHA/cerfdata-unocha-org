@@ -47,7 +47,7 @@
 		colorInterpolatorUnderfunded = d3.interpolateRgb("#FFFFFF", d3.color(choroplethColorUnderfunded).darker(0.1)),
 		isTouchScreenOnly = (window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(any-pointer: fine)").matches),
 		isBookmarkPage = window.location.hostname + window.location.pathname === "cbpfgms.github.io/cerf-bi-stag/bookmark.html",
-		bookmarkSite = "https://cbpfgms.github.io/cerf-bi-stag/bookmark.html?",
+		bookmarkSite = "https://cerf.data.unocha.org/bookmark.html?",
 		fadeOpacity = 0.2,
 		tooltipMargin = 8,
 		tooltipSvgWidth = 310,

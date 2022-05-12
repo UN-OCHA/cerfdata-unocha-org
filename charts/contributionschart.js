@@ -50,7 +50,7 @@
 		privateDonorsIsoCode = "xprv",
 		vizNameQueryString = "contributionschart",
 		isBookmarkPage = window.location.hostname + window.location.pathname === "cbpfgms.github.io/cerf-bi-stag/bookmark.html",
-		bookmarkSite = "https://cbpfgms.github.io/cerf-bi-stag/bookmark.html?",
+		bookmarkSite = "https://cerf.data.unocha.org/bookmark.html?",
 		helpPortalUrl = "https://gms.unocha.org/content/business-intelligence#CBPF_Contributions",
 		dataUrl = "https://cbpfgms.github.io/pfbi-data/cerf_sample_data/CERF_ContributionTotal.csv",
 		flagsUrl = "./assets/img/flags24.json",
