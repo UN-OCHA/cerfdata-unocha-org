@@ -96,7 +96,7 @@
 		masterEmergencyGroupUrl = "https://cbpfgms.github.io/pfbi-data/mst/MstEmergencyGroup.json",
 		masterAllocationTypesUrl = "https://cbpfgms.github.io/pfbi-data/mst/MstAllocation.json",
 		masterFundsUrl = "https://cbpfgms.github.io/pfbi-data/mst/MstFundv2.json",
-		masterRegionsUrl = "https://cbpfgms.github.io/pfbi-data/mst/MstRegion.json",
+		masterRegionsUrl = "https://cbpfgms.github.io/pfbi-data/mst/MstRegion.json", 
 		csvDateFormat = d3.utcFormat("_%Y%m%d_%H%M%S_UTC"),
 		viewOptions = ["aggregated", "group"],
 		viewButtonsText = {
