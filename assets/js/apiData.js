@@ -162,21 +162,13 @@ function formatNumberWithoutSymbol(num, digits) {
 
 function ConvertJsonDateTime(jsonDate) {
     var date = new Date(jsonDate);
-    var month = date.getMonth() + 1;
-    month = month.toString().length > 1 ? month : "0" + month;
 
-    var hour = date.getHours().toString();
-    var min = date.getMinutes().toString();
-    var sec = date.getSeconds().toString();
+    // Array of month names
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
+    // Extracting the month name based on the month number
+    var month = monthNames[date.getMonth()];
 
-    if (hour.length === 1)
-        hour = "0" + hour.toString();
-
-    if (min.length === 1)
-        min = "0" + min.toString();
-
-    if (sec.length === 1)
-        sec = "0" + sec.toString();
-
-    return date.getDate() + "/" + month + "/" + date.getFullYear() + " " + hour + ":" + min + ":" + sec;
+    // Building the formatted date string
+    return date.getDate() + " " + month + " " + date.getFullYear();
 }
