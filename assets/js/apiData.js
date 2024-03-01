@@ -7,10 +7,11 @@ function LoadData() {
     LoadCBPFSummary(year);
     LoadAmount();
     LoadDate();
-    const event = new CustomEvent("d3ChartsYear", {
-        detail: +year
-    });
-    document.body.dispatchEvent(event);
+	//temporarily removing until fixing 2024 summary data
+    // const event = new CustomEvent("d3ChartsYear", {
+    //     detail: +year
+    // });
+    // document.body.dispatchEvent(event);
 }
 
 
