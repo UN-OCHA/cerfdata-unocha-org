@@ -1265,6 +1265,8 @@
 			.attr("width", flagSize)
 			.attr("height", flagSize)
 			.attr("href", d => {
+				//REMOVE, TEMPORARY ONLY
+				if (d.id === "donor#211") return flagsData.qprv;
 				if (d.codeId === othersId) return blankFlag;
 				if (lists.donorIsoCodes[d.codeId].toLowerCase() && !flagsData[lists.donorIsoCodes[d.codeId].toLowerCase()]) console.warn("Missing flag: " + d.name, d);
 				return flagsData[lists.donorIsoCodes[d.codeId].toLowerCase()] || blankFlag;
@@ -1446,6 +1448,8 @@
 					.attr("height", flagSize)
 					.style("margin-right", "8px")
 					.attr("src", () => {
+						//REMOVE, TEMPORARY ONLY
+						if (datum.id === "donor#211") return flagsData.qprv;
 						if (lists.donorIsoCodes[datum.codeId].toLowerCase() && !flagsData[lists.donorIsoCodes[datum.codeId].toLowerCase()]) console.warn("Missing flag: " + datum.name, d);
 						return flagsData[lists.donorIsoCodes[datum.codeId].toLowerCase()] || blankFlag;
 					});
