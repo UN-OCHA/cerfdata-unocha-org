@@ -147,7 +147,9 @@
 			"Multi-purpose CASH",
 			"Emergency Telecommunications",
 			"Mine Action",
-			"To be determined"
+			"To be determined",
+			"Common and Support Services",
+			"Multi-Purpose cash"
 		])
 		.range(["Food Security",
 			"Health",
@@ -162,11 +164,13 @@
 			"Camp Coordination",
 			"Early Recovery",
 			"Multi-Sector",
-			"Multi-purpose",
-			"Multi-purpose",
+			"Multi-purpose CASH",
+			"Multi-purpose CASH",
 			"Emergency Telecom.",
 			"Mine Action",
-			"To\u00a0be determined"
+			"To\u00a0be determined",
+			"Common Services",
+			"Multi-purpose CASH"
 		]);
 
 	let isSnapshotTooltipVisible = false,
