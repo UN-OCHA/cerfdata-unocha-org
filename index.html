@@ -6,39 +6,19 @@
 	<title>Home - CERF Data Hub</title>
 	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">	
-    <link rel="stylesheet" href="assets/css/smoothproducts.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">	    
     <link rel="stylesheet" href="assets/css/pf-one-bi.css">
     <link rel="stylesheet" href="assets/css/d3chartstyles.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js" integrity="sha512-FHsFVKQ/T1KWJDGSbrUhTJyS1ph3eRrxI228ND0EGaEp6v4a/vGwPWd3Dtd/+9cI7ccofZvl/wulICEurHN1pg==" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js" integrity="sha512-4UKI/XKm3xrvJ6pZS5oTRvIQGIzZFoXR71rRBb1y2N+PbwAsKa5tPl2J6WvbEvwN3TxQCm8hMzsl/pO+82iRlg==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.js"></script>
+	<script src="https://unpkg.com/d3-sankey@0"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha512-cLuyDTDg9CSseBSFWNd4wkEaZ0TBEpclX0zD3D6HjI19pO39M58AgJ1SjHp6c7ZOp0/OCRcC2BCvvySU9KJaGw==" crossorigin="anonymous"></script>
     <script type="text/javascript" src="assets/js/html2canvas.min.js"></script>
-    <script src="assets/js/CheckBrowserCompatibility.js"></script>
-    <style>			
-		.pf-onebi-logo{background-repeat: no-repeat; background-size: contain; background-position: center left; background-image: url(assets/img/cerf-data-hub-logo.svg); float: left; margin: 0; text-indent: 58px; min-width: 300px; height: 50px;}	
-		@media (min-width: 576px) {	
-          .navbar {	
-              padding-top: 1rem !important;	
-              padding-bottom: 1rem !important;	
-          }	
-        }
-	</style>
-    <!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-MD2HH8W');</script>
-        <!-- End Google Tag Manager -->	
+	<script src="assets/js/CheckBrowserCompatibility.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1884029-23"></script>
 </head>
 <body id="page-top">
-    <!-- Google Tag Manager (noscript) -->
-	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MD2HH8W"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
 	<div class="cd-header">
 		<div class="cd-global-header">
             <div class="container">
@@ -96,30 +76,35 @@
             </div>
         </div>
 	</div>
-	<nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">	
-		<div class="container"><a class="navbar-brand js-scroll-trigger pf-onebi-logo" href="#page-top"><br></a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive"	
-                aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-align-justify"></i></button>	
-            <div class="collapse navbar-collapse" id="navbarResponsive">	
-                <ul class="nav navbar-nav ml-auto font-weight-bold text-uppercase" aria-labelledby="navbarDropdownMenuLink">	
-                    <li class="nav-item role="presentation"><a class="nav-link js-scroll-trigger" href="#Allocations" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Allocations</a>	
-					</li>	
-                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#Contributions">Contributions</a></li>	
-                    <!--<li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="data.html">Data Explorer</a></li>-->	
-                </ul>	
-            </div>		
-        </div>	
+	<nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+		<div class="container"><a class="navbar-brand js-scroll-trigger pf-onebi-logo" href="#page-top"></a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-align-justify"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto font-weight-bold text-uppercase" aria-labelledby="navbarDropdownMenuLink">
+                    <li class="nav-item dropdown dropdown-panel" role="presentation"><a class="nav-link dropdown-toggle js-scroll-trigger" href="#Allocations" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Allocations</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item js-scroll-trigger" href="#allocation-overview-tab">Allocations Overview</a>
+							<a class="dropdown-item js-scroll-trigger" href="#allocation-emergency-tab">Allocations by Emergency Types</a>
+                            <a class="dropdown-item" href="https://cerf.un.org/what-we-do/allocation-data" target="_blank">Allocation Data</a>
+            			</ul>
+					</li>
+                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#Contributions">Contributions</a></li>
+                    <!--<li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="data.html">Data Explorer</a></li>-->
+                </ul>
+            </div>	
+        </div>
 	</nav>
 	<header class="masthead d-flex header-panel">		
 		<div class="container my-auto">
 			<div class="row">
 				<div class="col-lg-12 mx-auto">
-					<h1 class="font-weight-bold mb-2 mt-5 font-3rem"><span style="color: #ffcb05;">CERF</span> DATA HUB</h1>				
-					<p class="title-desc mb-4">The CERF Data Hub provides detailed contribution and allocation data in real-time</p>
+					<h1 class="font-weight-bold mb-2 mt-6 font-3rem"><span style="color: #ffcb05;">CERF</span> DATA HUB</h1>				
+					<p class="title-desc mb-2">The CERF Data Hub provides detailed contribution and allocation data in real-time</p>
 					<hr>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-2 mb-4 mt-4">
+				<div class="col-lg-2 mb-4 mt-2">
 					 <form>
 						<select id="lstYear" class="custom-select select-box" onchange="LoadData();">
                             <option selected>2025</option>
@@ -128,9 +113,9 @@
 							<option>2022</option>
 							<option>2021</option>
 							<option>2020</option>
-                            <option>2019</option>
-                            <option>2018</option>
-                            <option>2017</option>
+                             				<option>2019</option>
+                             				<option>2018</option>
+                             				<option>2017</option>
 						</select>
 					</form>
 				</div>
@@ -154,6 +139,19 @@
                         <span class="top"><p>The CERF Data Hub Portal provides real-time information on CERF donors</p><i></i></span>
                     </div>
                 </div>
+                <div class="col banner-brdr">					
+				</div>
+                <div class="col align-self-end">
+                    <div class="mt-n-60 allocation-timeline">							
+                        <a href="cva.html" title="Cash and Voucher Assistance - Data Visualization"><img src="assets/img/cva-banner.png" alt="Cash and Voucher Assistance - Data Visualization"></a>
+                    </div>
+                </div>
+				
+				<!-- <div class="col align-self-end">
+                    <div class="mt-n-60 allocation-timeline">							
+                        <a href="allocations.html" title="CERF Allocation Timeline"><img src="assets/img/allocation-timeline-banner.png" alt="CERF Allocation Timeline"></a>
+                    </div>
+                </div> -->
                 <!--<div class="col-md-auto">
                     <div class="figure-box-panel tooltip-custom">							
                         <p><b><span id="spnPartners"></span></b> Recipients</p>
@@ -168,28 +166,34 @@
                 </div>-->		
 			</div>
 			<div class="row">
-				<div class="col"><p class="latest-date mt-3 m-0">Data updated on <span id="updatedOn"></span> CET</p></div>
+				<div class="col"><p class="latest-date mt-3 m-0">Data updated on <span id="updatedOn"></span> EST</p></div>
 			</div>
 		</div>		
 	</header>
 	<section>
 		<div class="container">
-            <div class="row">
+			<div class="row">
+				<div class="col intro-txt mt-3 mb-4">	
+					<p class="mt-3">CERF is one of the fastest and most effective ways to ensure that urgently needed humanitarian assistance reaches people caught up in crises. Established by the United Nations General Assembly in 2005 as the United Nations global emergency response fund, CERF enables humanitarian responders to deliver life-saving assistance whenever and wherever crises strike.</p>					
+				</div>
+                <br>
+			</div>
+			<div class="row">
 				<div class="col text-center mb-2 pt-5 link-style d-flex justify-content-left position-relative">					
 					<a class="txt-header text-uppercase js-scroll-trigger" href="#" role="button"><i class="fa fa-globe f-a mr-1 font-09em clr-grey"></i> CERF - BY YEAR</a><!--<button class="video-btn" data-toggle="modal" data-src="https://ocha.fleeq.io/l/s7q22qmqus-53e65u965e" data-target="#myModal"><span class="video-info"><i class="fa fa-play-circle fa-2x"></i></span></button>-->
 				</div>
 			</div>
-            <div class="row">  	
-				<div class="border-top pt-3">	
-                	<div id="d3chartcontainercesank" data-title=" " data-year="2025" data-responsive="false" data-lazyload="true"></div><script type="text/javascript" src="charts/sankeydiagram.js"></script>	
-				</div>	
+            <div class="row">  
+				<div class="border-top pt-3">
+                	<div id="d3chartcontainercesank" data-title=" " data-year="2025" data-responsive="false" data-lazyload="true"></div><script type="text/javascript" src="charts/sankeydiagram.js"></script>
+				</div>
             </div>
 		</div>
 	</section>
 	<section id="Allocations">
 		<div class="container">
 			<div class="row">
-				<div class="col text-center mt-5 mb-2 pt-5 link-style d-flex justify-content-left position-relative">						
+				<div class="col text-center mt-5 mb-2 pt-5 link-style d-flex justify-content-left position-relative">					
 					<a class="txt-header text-uppercase js-scroll-trigger" href="#Allocations" role="button"><i class="fa fa-map-o f-a mr-1 font-09em clr-grey"></i> Allocations</a><!--<button class="video-btn" data-toggle="modal" data-src="https://ocha.fleeq.io/l/s7q22qmqus-53e65u965e" data-target="#myModal"><span class="video-info"><i class="fa fa-play-circle fa-2x"></i></span></button>-->
 				</div>
 			</div>
@@ -198,8 +202,7 @@
 					<ul class="nav nav-tabs mb-4 pt-1 pb-1" id="myTab" role="tablist">
   						<li class="nav-item waves-effect waves-light mr-4">
     						<a class="nav-link active" id="allocation-overview-tab" data-toggle="tab" href="#allocation-overview" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-map-o f-a mr-1"></i> Allocations Overview</a>
-  						</li>
-  											
+  						</li>				
 					</ul>
 					<div class="tab-content border-top pt-3" id="myTabContent">
 						<div class="tab-pane active show" id="allocation-overview" role="tabpanel" aria-labelledby="allocation-overview-tab">
@@ -208,14 +211,28 @@
 					</div>
 				</div>
 			</div>
+			<div class="row mb-5">
+				<div class="col">
+					<ul class="nav nav-tabs mb-4 pt-1 pb-1" id="myTab" role="tablist">
+  						<li class="nav-item waves-effect waves-light mr-4">
+    						<a class="nav-link active" id="allocation-emergency-tab" data-toggle="tab" href="#allocation-emergency" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-map-o f-a mr-1"></i> Allocations by Emergency Types</a>
+  						</li>				
+					</ul>
+					<div class="tab-content border-top pt-3" id="myTabContent">
+						<div class="tab-pane active show" id="allocation-emergency" role="tabpanel" aria-labelledby="allocation-overview-tab">
+                            <div><div id="d3chartcontaineralloctimeline" data-title=" " data-year="2025" data-fund="all" data-region="all" data-emergencygroup="all" data-allocationtype="all" data-view="group" data-responsive="true" data-lazyload="true"></div><script type="text/javascript" src="charts/allocationtimeline.js"></script></div>
+                        </div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 	
-	<section id="Contributions">
+	<!--<section id="Contributions">
 		<div class="container">
 			<div class="row">
-				<div class="col text-center mt-5 mb-2 pt-5 link-style d-flex justify-content-left position-relative">						
-					<a class="txt-header text-uppercase js-scroll-trigger" href="#Contributions" role="button"><i class="fa fa-bar-chart mr-1 clr-grey"></i> Contributions</a><!--<button class="video-btn" data-toggle="modal" data-src="https://ocha.fleeq.io/l/s7q22qmqus-53e65u965e" data-target="#myModal"><span class="video-info"><i class="fa fa-play-circle fa-2x"></i></span></button>-->
+				<div class="col text-center mt-5 mb-2 pt-5 link-style d-flex justify-content-left position-relative">					
+					<a class="txt-header text-uppercase js-scroll-trigger" href="#Contributions" role="button"><i class="fa fa-bar-chart mr-1 clr-grey"></i> Contributions</a><button class="video-btn" data-toggle="modal" data-src="https://ocha.fleeq.io/l/s7q22qmqus-53e65u965e" data-target="#myModal"><span class="video-info"><i class="fa fa-play-circle fa-2x"></i></span></button>
 				</div>
 			</div>
 			<div class="row mb-5">
@@ -223,6 +240,31 @@
 					<ul class="nav nav-tabs mb-4 pt-1 pb-1 d-none" id="myTab2" role="tablist">
   						<li class="nav-item waves-effect waves-light">
     						<a class="nav-link active" id="contributions-overview-tab" data-toggle="tab" href="#contributions-overview" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-money mr-1"></i> Contribution Overview</a>
+  						</li>
+					</ul>
+					<div class="tab-content border-top pt-3" id="myTabContent2">
+                        <div class="tab-pane active center" id="contributions-overview" role="tabpanel" aria-labelledby="contributions-tab" style="width:100%;text-align: center;">
+							<div id="d3chartcontainercontribover" data-year="2021" data-contribution="total" data-responsive="true" data-lazyload="true"></div>
+							<script type="text/javascript" src="charts/contributionsoverview.js"></script>
+                        </div>
+                        <p><i>*Individual contributions made through the UN Foundation and below $10,000 is collectively counted as one donor</i></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>-->
+    <section id="Contributions">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center mt-5 mb-2 pt-5 link-style d-flex justify-content-left position-relative">					
+					<a class="txt-header text-uppercase js-scroll-trigger" href="#Contributions-chart" role="button"><i class="fa fa-bar-chart mr-1 clr-grey"></i> Contributions</a>
+				</div>
+			</div>
+			<div class="row mb-5">
+				<div class="col">
+					<ul class="nav nav-tabs mb-4 pt-1 pb-1 d-none" id="myTab2" role="tablist">
+  						<li class="nav-item waves-effect waves-light">
+    						<a class="nav-link active" id="contributions-chart-tab" data-toggle="tab" href="#contributions-chart" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-money mr-1"></i> Contributions</a>
   						</li>
 					</ul>
 					<div class="tab-content border-top pt-3" id="myTabContent2">
@@ -287,15 +329,6 @@
                 </div>
             </div>
             <div class="cd-footer__section cd-footer__section--copyright">
-                <div class="cd-footer-copyright">
-                    <span class="cd-footer-copyright__text">Except where otherwise noted, content on this site is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a> International license.</span>
-                    <a class="cd-footer-copyright__link" href="https://creativecommons.org/licenses/by/4.0/">
-                        <span class="element-invisible">Creative Commons BY 4.0</span>
-                        <svg class="icon icon--cc">
-                            <use xlink:href="#creative-commons"></use>
-                        </svg>
-                    </a>
-                </div>
             </div>
         </div>
     </footer>
@@ -603,10 +636,11 @@
     </div>
 	
 	<script src="assets/js/jquery.min.js"></script>	
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>	
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>	
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+	
 	<script type="text/javascript">
 		$(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
@@ -624,11 +658,24 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        if (document.location.hostname.search("cerf.data.unocha.org") !== -1) {
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-1884029-23');
+        }
+    </script>
+	
 	<script src="assets/js/jquery.blockUI.js"></script>
 	<script src="assets/js/popup-video.js"></script>
 	<script type="text/javascript" id="cookieinfo" src="assets/js/cookieinfo.min.js" data-bg="#002856" data-fg="#FFF" data-link="#FFF" data-cookie="CookieInfoScript" data-text-align="left" data-close-text="OK">
     </script>		
 	<script src="assets/js/respond.js"></script> 
+	
 	<script src="assets/js/custom-one-bi.js"></script>	
 	<script src="assets/js/apiData.js"></script>
 </body>
