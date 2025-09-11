@@ -2,7 +2,8 @@
 body{font-family: 'Roboto', sans-serif; color:#333; background: #fff; padding: 0; margin: 0;}
 
 .container {width: 100%; padding-right: 15px; padding-left: 15px; margin-right: auto; margin-left: auto; box-sizing: border-box;}
-header{background-image: url(../../assets/img/pf-one-bi-header-bg.png); display: block; width: 100%; background-repeat: no-repeat; background-position: top center; min-height: 500px; border-bottom: 5px solid #cfe2f0;}  
+header{background-image: url(../../assets/img/pf-one-bi-header-bg.png); display: block; width: 100%; background-repeat: no-repeat; background-position: top center; min-height: 450px; border-bottom: 5px solid #cfe2f0;} 
+header#cvaHeader {min-height: 200px;} 
 
 .pf-onebi-logo{background-repeat: no-repeat; background-size: contain; background-position: center left; background-image: url(../../assets/img/cerf-data-hub-logo.svg); float: left; margin: 0; min-width: 300px; height: 50px;}
 
@@ -15,7 +16,7 @@ header{background-image: url(../../assets/img/pf-one-bi-header-bg.png); display:
 #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover, #mainNav .navbar-nav > li.nav-item > a.nav-link:focus.active:hover {
   background-color: transparent;}
 .navbar-nav li:hover > ul.dropdown-menu {
-    display: block;
+    display: block; margin: 0;
 }
 .dropdown-panel ul a{font-size: 0.9em; color: #8d8d9c;}
 
@@ -55,7 +56,7 @@ a:hover.txt-header {color:#333 !important;}
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{color: #498bca; background-color: transparent; font-weight: 700; font-size: 1em;}
 .nav-tabs .nav-link{border-bottom: 2px solid transparent; padding: .2rem 0.5rem; border-left: none; border-top: none; border-right: none; font-family: 'Roboto', sans-serif; font-size: 1em; color:#58585e; font-weight: 300;}
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{color: #333;}
-.btn-light {font-family: 'Roboto', sans-serif; color: #212529; background-color: #eee; border-color: #f2f2f2;padding: 1rem 2rem; border-radius: 300px;}
+.btn-light {font-family: 'Roboto', sans-serif; color: #212529; background-color: #f2f2f2; border-color: #f2f2f2;padding: 1rem 2rem; border-radius: 300px;}
 .btn-light.focus, .btn-light:focus, .btn-light:hover {
   color: #212529;
   background-color: #e2e6ea;
@@ -99,6 +100,9 @@ a:hover.txt-header {color:#333 !important;}
 .font-09em{font-size: 0.9em !important;}
 .clr-grey{color:#ccc;}
 .f-a{font-family: 'FontAwesome' !important; font-weight: normal !important;}
+.mt-n-60{margin-top: -60px;}
+.banner-brdr{border-right: 1px solid #eaeaea; display: inline-block; margin-right: 25px; max-height: 173px; margin-top: -60px; margin-left: 25px;}
+.mt-6 {margin-top: 6rem !important;}
 .cookie-panel {
     background-color: rgba(0, 0, 0, 0.80);
     padding: 20px 10px;
@@ -210,13 +214,16 @@ a:hover.txt-header {color:#333 !important;}
 	font-weight: 300;
 	display: block;
 }
-
+.allocation-timeline {text-align: right;}
 footer{background-color: #BCBEC0; padding: 15px 0; width: 100%; overflow: auto;}
 
 @media (max-width: 768px) { 	
 	.fixed-top{background-color: #fff;}
 	header{padding-top: 20px;}
 	.figure-box-panel{margin-bottom: 10px;}
+	.mt-n-60 {margin: 0;}
+	.banner-brdr {border-bottom: 1px solid #cfe2f0; margin: 0 0 25px 0; border-right: none;}
+	.allocation-timeline {text-align: center;}
 }
 
 @media (max-width: 991.98px) { 	
