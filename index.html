@@ -17,6 +17,115 @@
     <script type="text/javascript" src="assets/js/html2canvas.min.js"></script>
 	<script src="assets/js/CheckBrowserCompatibility.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1884029-23"></script>
+	
+	<!-- ============================================
+		MAINTENANCE POPUP - COMMENT OUT TO DISABLE
+		============================================ -->
+	<style>
+		/* Maintenance Popup Styles */
+		#maintenance-popup-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.7);
+			backdrop-filter: blur(10px);
+			-webkit-backdrop-filter: blur(10px);
+			z-index: 9999;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 20px;
+		}
+		
+		#maintenance-popup-content {
+			background: #fff;
+			border-radius: 10px;
+			padding: 40px;
+			max-width: 600px;
+			width: 100%;
+			text-align: center;
+			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+			position: relative;
+			animation: fadeIn 0.3s ease-in;
+		}
+		
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: scale(0.9);
+			}
+			to {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
+		
+		#maintenance-popup-content .maintenance-icon {
+			font-size: 64px;
+			color: #ffcb05;
+			margin-bottom: 20px;
+			animation: spin 2s linear infinite;
+		}
+		
+		@keyframes spin {
+			from {
+				transform: rotate(0deg);
+			}
+			to {
+				transform: rotate(360deg);
+			}
+		}
+		
+		#maintenance-popup-content h2 {
+			color: #002856;
+			font-weight: bold;
+			margin-bottom: 15px;
+			font-size: 28px;
+		}
+		
+		#maintenance-popup-content p {
+			color: #333;
+			margin-bottom: 10px;
+			line-height: 1.6;
+		}
+		
+		#maintenance-popup-content .maintenance-btn {
+			margin-top: 25px;
+			background-color: #002856;
+			color: #fff;
+			border: none;
+			padding: 12px 30px;
+			border-radius: 5px;
+			font-weight: bold;
+			cursor: pointer;
+			text-transform: uppercase;
+			transition: background-color 0.3s;
+		}
+		
+		#maintenance-popup-content .maintenance-btn:hover {
+			background-color: #004080;
+		}
+		
+		/* Blur effect for body content */
+		body.maintenance-active {
+			overflow: hidden;
+		}
+		
+		body.maintenance-active #page-top {
+			filter: blur(5px);
+			-webkit-filter: blur(5px);
+			pointer-events: none;
+		}
+		
+		#maintenance-popup-overlay {
+			pointer-events: auto;
+		}
+	</style>
+	<!-- ============================================
+		END MAINTENANCE POPUP STYLES
+		============================================ -->
 </head>
 <body id="page-top">
 	<div class="cd-header">
@@ -635,6 +744,23 @@
         </span>
     </div>
 	
+	<!-- ============================================
+		MAINTENANCE POPUP HTML - COMMENT OUT TO DISABLE
+		============================================ -->
+	<div id="maintenance-popup-overlay" style="display: none;">
+		<div id="maintenance-popup-content">
+			<i class="fa fa-cog maintenance-icon"></i>
+			<h2>Website Under Maintenance</h2>
+			<p>We're currently performing scheduled maintenance to improve your experience.</p>
+			<p>The CERF Data Hub will be back online shortly. We apologize for any inconvenience.</p>
+			<p><strong>For urgent inquiries, please visit:</strong></p>
+			<a href="https://cerf.un.org/" target="_blank" class="maintenance-btn" style="text-decoration: none; display: inline-block;">Visit CERF Website</a>
+		</div>
+	</div>
+	<!-- ============================================
+		END MAINTENANCE POPUP HTML
+		============================================ -->
+	
 	<script src="assets/js/jquery.min.js"></script>	
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>	
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
@@ -678,6 +804,27 @@
 	
 	<script src="assets/js/custom-one-bi.js"></script>	
 	<script src="assets/js/apiData.js"></script>
+	
+	<!-- ============================================
+		MAINTENANCE POPUP JAVASCRIPT - COMMENT OUT TO DISABLE
+		============================================ -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// Show maintenance popup
+			$('#maintenance-popup-overlay').fadeIn(300);
+			$('body').addClass('maintenance-active');
+			
+			// Optional: Close popup on button click (uncomment if you want users to be able to close it)
+			// $('.maintenance-btn').on('click', function(e) {
+			// 	e.preventDefault();
+			// 	$('#maintenance-popup-overlay').fadeOut(300);
+			// 	$('body').removeClass('maintenance-active');
+			// });
+		});
+	</script>
+	<!-- ============================================
+		END MAINTENANCE POPUP JAVASCRIPT
+		============================================ -->
 </body>
 </html>
 
