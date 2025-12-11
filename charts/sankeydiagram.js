@@ -1444,12 +1444,12 @@
 			.attr("x1", -centralCirclePanel.radius * 0.5)
 			.attr("x2", centralCirclePanel.radius * 0.5);
 
-		const contributionsValue = dataContributions.nodes.find(
-			e => e.level === 2
-		).value;
-		const allocationsValue = dataAllocations.nodes.find(
-			e => e.level === 1
-		).value;
+		const contributionsValue = dataContributions.nodes.length
+			? dataContributions.nodes.find(e => e.level === 2).value
+			: 0;
+		const allocationsValue = dataAllocations.nodes.length
+			? dataAllocations.nodes.find(e => e.level === 1).value
+			: 0;
 
 		let contributionsValueText = centralCirclePanel.main
 			.selectAll("." + classPrefix + "contributionsValueText")
@@ -3395,7 +3395,10 @@
 		yearsArrayAllocations.sort((a, b) => a - b);
 		yearsArrayContributions.sort((a, b) => a - b);
 		yearsArrayAllocations.forEach(e => {
-			if (yearsArrayContributions.includes(e)) yearsArray.push(e);
+			if (!yearsArray.includes(e)) yearsArray.push(e);
+		});
+		yearsArrayContributions.forEach(e => {
+			if (!yearsArray.includes(e)) yearsArray.push(e);
 		});
 	}
 
