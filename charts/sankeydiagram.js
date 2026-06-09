@@ -107,9 +107,9 @@
 		chartTitleDefault = "Sankey diagram",
 		vizNameQueryString = "sankey",
 		allocationsDataUrl =
-			"https://cbpfgms.github.io/pfbi-data/allocationSummarySankey.csv",
+			"https://pfbi-webjob-contribution-prod-g7b3h4b9ftfahnbk.eastus2-01.azurewebsites.net/download/loadAllocations/allocationSummarySankey.csv",
 		contributionsDataUrl =
-			"https://cbpfgms.github.io/pfbi-data/contributionSummarySankey.csv",
+			"https://pfbi-webjob-contribution-prod-g7b3h4b9ftfahnbk.eastus2-01.azurewebsites.net/download/loadContribution/contributionSummarySankey.csv",
 		masterDonorsUrl =
 			"https://cbpfgms.github.io/pfbi-data/mst/MstDonor.json",
 		masterFundsUrl =
