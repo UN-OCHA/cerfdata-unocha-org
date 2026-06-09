@@ -70,7 +70,7 @@
 		formatNumberSI = d3.format(".3s"),
 		chartTitleDefault = "Allocations",
 		vizNameQueryString = "allocations",
-		dataUrl = "https://cbpfgms.github.io/pfbi-data/cerf/cerf_allocationSummary_byorg.csv",
+		dataUrl = "https://pfbi-webjob-contribution-prod-g7b3h4b9ftfahnbk.eastus2-01.azurewebsites.net/download/loadAllocations/cerf_allocationSummary_byorg.csv",
 		mapUrl = "https://cbpfgms.github.io/pfbi-data/map/unworldmap.json",
 		masterFundsUrl = "https://cbpfgms.github.io/pfbi-data/mst/MstCountry.json",
 		masterAllocationTypesUrl = "https://cbpfgms.github.io/pfbi-data/mst/MstAllocation.json",
