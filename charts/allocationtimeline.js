@@ -103,7 +103,7 @@
 		chartTitleDefault = "Allocations Timeline",
 		vizNameQueryString = "alloctimeline",
 		allocationsDataUrl =
-			"https://cbpfgms.github.io/pfbi-data/cerf/cerf_application_v2.csv",
+			"https://pfbi-webjob-contribution-prod-g7b3h4b9ftfahnbk.eastus2-01.azurewebsites.net/download/loadCERFApplication_v2/cerf_application_v2.csv",
 		masterEmergencyTypeUrl =
 			"https://cbpfgms.github.io/pfbi-data/mst/MstEmergencyType.json",
 		masterEmergencyGroupUrl =
