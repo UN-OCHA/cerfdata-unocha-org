@@ -16,7 +16,7 @@ function LoadData() {
 
 function LoadCBPFSummary(allocYear) {
     showLoader();
-    fetch('https://cbpfgms.github.io/pfbi-data/cerf_sample_data/CERFSummary-' + allocYear + '.json')
+    fetch('https://pfbi-webjob-contribution-prod-g7b3h4b9ftfahnbk.eastus2-01.azurewebsites.net/download/cerf/CERFSummary-' + allocYear + '.json')
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
