@@ -3400,6 +3400,7 @@
 		yearsArrayContributions.forEach(e => {
 			if (!yearsArray.includes(e)) yearsArray.push(e);
 		});
+		yearsArray.sort((a, b) => a - b);
 	}
 
 	function processDataAllocations(rawDataAllocations) {
