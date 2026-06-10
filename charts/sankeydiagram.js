@@ -104,6 +104,7 @@
 			"#ED1C24",
 		],
 		allYearsOption = "all",
+		minFilterYear = 2010,
 		chartTitleDefault = "Sankey diagram",
 		vizNameQueryString = "sankey",
 		allocationsDataUrl =
@@ -3387,18 +3388,18 @@
 
 	function preProcessData(rawDataAllocations, rawDataContributions) {
 		yearsArrayAllocations.push(
-			...new Set(rawDataAllocations.map(e => e.allocationYear))
+			...new Set(rawDataAllocations.map(e => +e.allocationYear))
 		);
 		yearsArrayContributions.push(
-			...new Set(rawDataContributions.map(e => e.contributionYear))
+			...new Set(rawDataContributions.map(e => +e.contributionYear))
 		);
 		yearsArrayAllocations.sort((a, b) => a - b);
 		yearsArrayContributions.sort((a, b) => a - b);
 		yearsArrayAllocations.forEach(e => {
-			if (!yearsArray.includes(e)) yearsArray.push(e);
+			if (e >= minFilterYear && !yearsArray.includes(e)) yearsArray.push(e);
 		});
 		yearsArrayContributions.forEach(e => {
-			if (!yearsArray.includes(e)) yearsArray.push(e);
+			if (e >= minFilterYear && !yearsArray.includes(e)) yearsArray.push(e);
 		});
 		yearsArray.sort((a, b) => a - b);
 	}
